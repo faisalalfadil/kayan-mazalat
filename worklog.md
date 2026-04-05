@@ -108,3 +108,29 @@ All 6 admin components were read and analyzed against the API routes and databas
 6. **chat-messages.tsx** ✅ Already complete - Session list with last message preview, message view with user/bot bubbles, scroll area
 
 All changes passed ESLint with zero errors. Dev server confirmed operational.
+
+---
+## Task ID: 4
+### Work Task
+Create 3 detail modal components and fix all non-functional links on the homepage for the Saudi contracting company website "كيان القمة". Wire up click handlers in sections and integrate modals in home-client. Fix mobile menu to close on navigation.
+
+### Work Summary
+All 8 tasks completed successfully:
+
+1. **Service Detail Modal** (`/src/components/service-detail-modal.tsx`) - Created with Dialog component showing service icon, title, full description with extracted bullet-point features, optional image, and "طلب عرض سعر" CTA button that opens the quote modal.
+
+2. **Project Detail Modal** (`/src/components/project-detail-modal.tsx`) - Created with large project image, title, location/client/completion-date meta grid, full description, featured badge, and "تواصل معنا" button that scrolls to the contact section.
+
+3. **Blog Post Detail Modal** (`/src/components/blog-detail-modal.tsx`) - Created with post meta (date, author, blog name), title, and rendered content with support for headings, bullet points, and paragraphs.
+
+4. **Services Section** - Added `onServiceClick` prop and wired the "اعرف المزيد" button.
+
+5. **Projects Section** - Added `onProjectClick` prop and wired the "عرض التفاصيل" button.
+
+6. **Blog Section** - Added `onPostClick` prop and wired the "اقرأ المزيد" button.
+
+7. **Home Client** - Added state for selectedService, selectedProject, selectedPost with corresponding modal open states. Imported and rendered all 3 new modals alongside existing QuoteModal.
+
+8. **Mobile Menu** - Changed Sheet to controlled component (`open`/`onOpenChange`). Wrapped all mobile nav links and the CTA button with `SheetClose` to auto-close the sheet on click.
+
+All changes passed ESLint with zero errors. Dev server confirmed operational.

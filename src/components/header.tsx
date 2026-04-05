@@ -29,6 +29,7 @@ interface HeaderProps {
 export default function Header({ onOpenQuote }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,7 +162,7 @@ export default function Header({ onOpenQuote }: HeaderProps) {
           </div>
 
           {/* Mobile Menu */}
-          <Sheet>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
@@ -186,31 +187,32 @@ export default function Header({ onOpenQuote }: HeaderProps) {
               </SheetTitle>
               <nav className="flex flex-col gap-1 mt-4">
                 {navLinks.map((link) => (
-                  <button
-                    key={link.href}
-                    onClick={() => scrollToSection(link.href)}
-                    className={cn(
-                      'flex items-center gap-3 px-4 py-3 rounded-lg text-right transition-colors',
-                      activeSection === link.href.replace('#', '')
-                        ? 'bg-primary/10 text-primary font-medium'
-                        : 'hover:bg-accent/10 text-foreground'
-                    )}
-                  >
-                    {link.label}
-                  </button>
+                  <SheetClose asChild key={link.href}>
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className={cn(
+                        'flex items-center gap-3 px-4 py-3 rounded-lg text-right transition-colors w-full',
+                        activeSection === link.href.replace('#', '')
+                          ? 'bg-primary/10 text-primary font-medium'
+                          : 'hover:bg-accent/10 text-foreground'
+                      )}
+                    >
+                      {link.label}
+                    </button>
+                  </SheetClose>
                 ))}
               </nav>
               <div className="mt-6 px-4">
-                <Button
-                  onClick={() => {
-                    onOpenQuote();
-                  }}
-                  className="w-full"
-                  size="lg"
-                >
-                  <Phone className="w-4 h-4" />
-                  طلب عرض سعر
-                </Button>
+                <SheetClose asChild>
+                  <Button
+                    onClick={onOpenQuote}
+                    className="w-full"
+                    size="lg"
+                  >
+                    <Phone className="w-4 h-4" />
+                    طلب عرض سعر
+                  </Button>
+                </SheetClose>
               </div>
             </SheetContent>
           </Sheet>

@@ -36,6 +36,7 @@ interface Service {
 
 interface ServicesSectionProps {
   services: Service[];
+  onServiceClick: (service: Service) => void;
 }
 
 const containerVariants = {
@@ -51,7 +52,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-export default function ServicesSection({ services }: ServicesSectionProps) {
+export default function ServicesSection({ services, onServiceClick }: ServicesSectionProps) {
   return (
     <section id="services" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -109,7 +110,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
 
                 {/* Arrow */}
                 <div className="mt-4 pt-4 border-t border-border/50">
-                  <button className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <button onClick={() => onServiceClick(service)} className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                     اعرف المزيد
                     <ArrowLeft className="w-4 h-4" />
                   </button>

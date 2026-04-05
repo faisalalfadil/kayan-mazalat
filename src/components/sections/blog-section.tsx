@@ -15,6 +15,7 @@ interface BlogPost {
 
 interface BlogSectionProps {
   posts: BlogPost[];
+  onPostClick: (post: BlogPost) => void;
 }
 
 const containerVariants = {
@@ -36,7 +37,7 @@ const gradients = [
   'from-cyan-500 to-blue-600',
 ];
 
-export default function BlogSection({ posts }: BlogSectionProps) {
+export default function BlogSection({ posts, onPostClick }: BlogSectionProps) {
   if (posts.length === 0) return null;
 
   return (
@@ -118,7 +119,7 @@ export default function BlogSection({ posts }: BlogSectionProps) {
                 </p>
 
                 {/* Read more */}
-                <button className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                <button onClick={() => onPostClick(post)} className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                   اقرأ المزيد
                   <ArrowLeft className="w-4 h-4" />
                 </button>

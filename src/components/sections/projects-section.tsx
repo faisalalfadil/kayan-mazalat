@@ -18,6 +18,7 @@ interface Project {
 
 interface ProjectsSectionProps {
   projects: Project[];
+  onProjectClick: (project: Project) => void;
 }
 
 const containerVariants = {
@@ -33,7 +34,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-export default function ProjectsSection({ projects }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects, onProjectClick }: ProjectsSectionProps) {
   return (
     <section id="projects" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
@@ -93,6 +94,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                       {project.description}
                     </p>
                     <Button
+                      onClick={() => onProjectClick(project)}
                       size="sm"
                       variant="secondary"
                       className="bg-white text-foreground hover:bg-white/90"
