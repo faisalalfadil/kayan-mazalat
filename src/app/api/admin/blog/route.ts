@@ -27,7 +27,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { title, excerpt, content, image, author, published } = body
+    const { title, excerpt, content, image, images, author, published } = body
 
     if (!title || !content) {
       return NextResponse.json(
@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
         excerpt: excerpt || null,
         content,
         image: image || null,
+        images: images || null,
         author: author || 'كيان القمة',
         published: published ?? false,
       },

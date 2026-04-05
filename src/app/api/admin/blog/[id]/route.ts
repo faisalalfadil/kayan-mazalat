@@ -8,7 +8,7 @@ export async function PUT(
   try {
     const { id } = await params
     const body = await request.json()
-    const { title, excerpt, content, image, author, published } = body
+    const { title, excerpt, content, image, images, author, published } = body
 
     const post = await db.blogPost.update({
       where: { id },
@@ -17,6 +17,7 @@ export async function PUT(
         ...(excerpt !== undefined && { excerpt: excerpt || null }),
         ...(content !== undefined && { content }),
         ...(image !== undefined && { image: image || null }),
+        ...(images !== undefined && { images: images || null }),
         ...(author !== undefined && { author }),
         ...(published !== undefined && { published }),
       },
