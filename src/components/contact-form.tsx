@@ -92,7 +92,7 @@ export default function ContactForm() {
       <div>
         <h3 className="text-2xl font-bold mb-2 text-foreground">تواصل معنا</h3>
         <p className="text-muted-foreground mb-8">
-          يسعدنا تواصلكم معنا. Fill out the form or use the contact info below.
+          يسعدنا تواصلكم معنا. يرجى ملء النموذج أو استخدام معلومات الاتصال أدناه.
         </p>
 
         <div className="space-y-6">

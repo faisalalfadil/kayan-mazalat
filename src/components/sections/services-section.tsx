@@ -5,9 +5,9 @@ import {
   Layers,
   Thermometer,
   Warehouse,
-  Building,
+  Building2,
   Wrench,
-  PencilRuler,
+  Ruler,
   ArrowLeft,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,9 +17,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Layers,
   Thermometer,
   Warehouse,
-  Building,
+  Building2,
+  Building: Building2,
   Wrench,
-  PencilRuler,
+  Ruler,
+  PencilRuler: Ruler,
+  HardHat: Wrench,
 };
 
 interface Service {
