@@ -18,7 +18,7 @@ interface BlogSectionProps {
 }
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.15 },
@@ -26,7 +26,7 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 1, y: 0 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
@@ -44,7 +44,7 @@ export default function BlogSection({ posts }: BlogSectionProps) {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}

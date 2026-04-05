@@ -64,7 +64,7 @@ export default function Header({ onOpenQuote }: HeaderProps) {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={{ y: 0 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={cn(
@@ -185,12 +185,9 @@ export default function Header({ onOpenQuote }: HeaderProps) {
                 </div>
               </SheetTitle>
               <nav className="flex flex-col gap-1 mt-4">
-                {navLinks.map((link, index) => (
-                  <motion.button
+                {navLinks.map((link) => (
+                  <button
                     key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
                     onClick={() => scrollToSection(link.href)}
                     className={cn(
                       'flex items-center gap-3 px-4 py-3 rounded-lg text-right transition-colors',
@@ -200,7 +197,7 @@ export default function Header({ onOpenQuote }: HeaderProps) {
                     )}
                   >
                     {link.label}
-                  </motion.button>
+                  </button>
                 ))}
               </nav>
               <div className="mt-6 px-4">

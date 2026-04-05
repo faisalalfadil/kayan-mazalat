@@ -28,7 +28,7 @@ const features = [
 ];
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.15 },
@@ -36,7 +36,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 1, y: 0 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
@@ -47,7 +47,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
@@ -65,7 +65,7 @@ export default function AboutSection() {
             </div>
             {/* Floating card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 1, scale: 1 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
               viewport={{ once: true }}
@@ -78,7 +78,7 @@ export default function AboutSection() {
 
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 1, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
