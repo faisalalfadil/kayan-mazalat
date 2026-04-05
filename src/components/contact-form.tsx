@@ -14,7 +14,6 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const contactInfo = [
   {
@@ -97,12 +96,8 @@ export default function ContactForm() {
 
         <div className="space-y-6">
           {contactInfo.map((item, index) => (
-            <motion.div
+            <div
               key={item.label}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="flex items-start gap-4"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
@@ -119,7 +114,7 @@ export default function ContactForm() {
                   {item.value}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -135,9 +130,7 @@ export default function ContactForm() {
       {/* Contact Form */}
       <div className="bg-card border rounded-2xl p-6 shadow-sm">
         {submitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <div
             className="flex flex-col items-center justify-center py-16 gap-4"
           >
             <CheckCircle2 className="w-16 h-16 text-green-500" />
@@ -145,7 +138,7 @@ export default function ContactForm() {
             <p className="text-muted-foreground text-center text-sm">
               سنتواصل معك في أقرب وقت ممكن
             </p>
-          </motion.div>
+          </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

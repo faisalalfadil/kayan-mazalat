@@ -34,7 +34,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Plus, Pencil, Trash2, RefreshCw } from 'lucide-react'
+import { Plus, Pencil, Trash2, RefreshCw, Search } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface Service {
@@ -69,6 +69,7 @@ export default function ServicesManagement() {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
+  const [search, setSearch] = useState('')
   const { toast } = useToast()
 
   const fetchServices = useCallback(async () => {
@@ -178,6 +179,12 @@ export default function ServicesManagement() {
     }
   }
 
+  const filteredServices = services.filter(
+    (s) =>
+      s.title.includes(search) ||
+      (s.titleEn && s.titleEn.toLowerCase().includes(search.toLowerCase()))
+  )
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -189,11 +196,22 @@ export default function ServicesManagement() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
-          <Plus className="w-4 h-4 ml-2" />
-          إضافة خدمة
-        </Button>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <div className="flex items-center gap-2 flex-1 w-full sm:w-auto">
+          <div className="relative flex-1 sm:max-w-xs">
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="بحث في الخدمات..."
+              className="pr-9"
+            />
+          </div>
+          <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
+            <Plus className="w-4 h-4 ml-2" />
+            إضافة خدمة
+          </Button>
+        </div>
         <Button variant="outline" onClick={fetchServices}>
           <RefreshCw className="w-4 h-4 ml-2" />
           تحديث
@@ -214,7 +232,7 @@ export default function ServicesManagement() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {services.map((service, idx) => (
+              {filteredServices.map((service, idx) => (
                 <TableRow key={service.id}>
                   <TableCell className="font-medium">{idx + 1}</TableCell>
                   <TableCell>
@@ -257,10 +275,10 @@ export default function ServicesManagement() {
                   </TableCell>
                 </TableRow>
               ))}
-              {services.length === 0 && (
+              {filteredServices.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8 text-gray-400">
-                    لا توجد خدمات
+                    {search ? 'لا توجد نتائج للبحث' : 'لا توجد خدمات'}
                   </TableCell>
                 </TableRow>
               )}

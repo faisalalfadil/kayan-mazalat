@@ -31,3 +31,22 @@ export async function PUT(
     )
   }
 }
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    await db.lead.delete({
+      where: { id },
+    })
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Lead delete error:', error)
+    return NextResponse.json(
+      { error: 'حدث خطأ في حذف الطلب' },
+      { status: 500 }
+    )
+  }
+}

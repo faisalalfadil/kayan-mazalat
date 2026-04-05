@@ -33,7 +33,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Plus, Pencil, Trash2, RefreshCw, MapPin } from 'lucide-react'
+import { Plus, Pencil, Trash2, RefreshCw, MapPin, Search } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface Project {
@@ -75,6 +75,7 @@ export default function ProjectsManagement() {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
+  const [search, setSearch] = useState('')
   const { toast } = useToast()
 
   const fetchProjects = useCallback(async () => {
@@ -168,6 +169,14 @@ export default function ProjectsManagement() {
     }
   }
 
+  const filteredProjects = projects.filter(
+    (p) =>
+      p.title.includes(search) ||
+      (p.titleEn && p.titleEn.toLowerCase().includes(search.toLowerCase())) ||
+      (p.location && p.location.includes(search)) ||
+      (p.client && p.client.includes(search))
+  )
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -179,11 +188,22 @@ export default function ProjectsManagement() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
-          <Plus className="w-4 h-4 ml-2" />
-          إضافة مشروع
-        </Button>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <div className="flex items-center gap-2 flex-1 w-full sm:w-auto">
+          <div className="relative flex-1 sm:max-w-xs">
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="بحث في المشاريع..."
+              className="pr-9"
+            />
+          </div>
+          <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
+            <Plus className="w-4 h-4 ml-2" />
+            إضافة مشروع
+          </Button>
+        </div>
         <Button variant="outline" onClick={fetchProjects}>
           <RefreshCw className="w-4 h-4 ml-2" />
           تحديث
@@ -204,7 +224,7 @@ export default function ProjectsManagement() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {projects.map((project) => (
+              {filteredProjects.map((project) => (
                 <TableRow key={project.id}>
                   <TableCell>
                     <div className="flex items-center gap-3">
@@ -264,10 +284,10 @@ export default function ProjectsManagement() {
                   </TableCell>
                 </TableRow>
               ))}
-              {projects.length === 0 && (
+              {filteredProjects.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8 text-gray-400">
-                    لا توجد مشاريع
+                    {search ? 'لا توجد نتائج للبحث' : 'لا توجد مشاريع'}
                   </TableCell>
                 </TableRow>
               )}

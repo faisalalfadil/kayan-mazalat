@@ -19,6 +19,16 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+import {
   Table,
   TableBody,
   TableCell,
@@ -26,7 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { RefreshCw, Eye, Phone, Mail, Building2, MessageSquare } from 'lucide-react'
+import { RefreshCw, Eye, Trash2, Phone, Mail, Building2, MessageSquare } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface Lead {
@@ -72,6 +82,8 @@ export default function LeadsManagement() {
   const [filterType, setFilterType] = useState<string>('all')
   const [filterStatus, setFilterStatus] = useState<string>('all')
   const [viewLead, setViewLead] = useState<Lead | null>(null)
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [updating, setUpdating] = useState<string | null>(null)
   const { toast } = useToast()
 
@@ -96,6 +108,22 @@ export default function LeadsManagement() {
   useEffect(() => {
     fetchLeads()
   }, [fetchLeads])
+
+  const handleDelete = async () => {
+    if (!deletingId) return
+    try {
+      const res = await fetch(`/api/admin/leads/${deletingId}`, { method: 'DELETE' })
+      if (res.ok) {
+        toast({ title: 'تم الحذف', description: 'تم حذف الطلب بنجاح' })
+        setDeleteOpen(false)
+        fetchLeads()
+      } else {
+        toast({ title: 'خطأ', description: 'حدث خطأ في الحذف', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'خطأ', description: 'حدث خطأ في الاتصال', variant: 'destructive' })
+    }
+  }
 
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     setUpdating(leadId)
@@ -222,9 +250,22 @@ export default function LeadsManagement() {
                     {new Date(lead.createdAt).toLocaleDateString('ar-SA')}
                   </TableCell>
                   <TableCell>
-                    <Button variant="ghost" size="icon" onClick={() => setViewLead(lead)}>
-                      <Eye className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center gap-1">
+                      <Button variant="ghost" size="icon" onClick={() => setViewLead(lead)}>
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setDeletingId(lead.id)
+                          setDeleteOpen(true)
+                        }}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -239,6 +280,24 @@ export default function LeadsManagement() {
           </Table>
         </CardContent>
       </Card>
+
+      {/* Delete Confirmation */}
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>هل أنت متأكد من الحذف؟</AlertDialogTitle>
+            <AlertDialogDescription>
+              سيتم حذف هذا الطلب نهائياً ولا يمكن استرجاعه.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>إلغاء</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">
+              حذف
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* View Lead Details Dialog */}
       <Dialog open={!!viewLead} onOpenChange={() => setViewLead(null)}>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
 import { Award, Briefcase, Users, HardHat } from 'lucide-react';
 
 const stats = [
@@ -12,29 +11,43 @@ const stats = [
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(value);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated.current) {
+            hasAnimated.current = true;
+            let start = 0;
+            const duration = 2000;
+            const increment = value / (duration / 16);
 
-    let start = 0;
-    const duration = 2000; // 2 seconds
-    const increment = value / (duration / 16);
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= value) {
+                setCount(value);
+                clearInterval(timer);
+              } else {
+                setCount(Math.floor(start));
+              }
+            }, 16);
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
+            return () => clearInterval(timer);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
-    return () => clearInterval(timer);
-  }, [isInView, value]);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [value]);
 
   return (
     <span ref={ref} className="text-4xl md:text-5xl font-bold text-white">
@@ -55,37 +68,24 @@ export default function StatsSection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 1, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             أرقام تتحدث عنّا
           </h2>
           <p className="text-white/70 max-w-xl mx-auto">
             إنجازات نفخر بها تعكس التزامنا بالتميز والجودة
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-4xl mx-auto">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
               <div className="w-14 h-14 rounded-xl bg-white/15 text-white flex items-center justify-center mx-auto mb-4">
                 <stat.icon className="w-7 h-7" />
               </div>
               <AnimatedNumber value={stat.value} suffix={stat.suffix} />
               <p className="text-white/70 text-sm mt-2">{stat.label}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
