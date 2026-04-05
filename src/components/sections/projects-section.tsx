@@ -1,8 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { MapPin, Eye } from 'lucide-react';
+import { MapPin, Eye, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Project {
@@ -10,6 +8,7 @@ interface Project {
   title: string;
   description: string;
   image: string;
+  images?: string | null;
   location?: string | null;
   client?: string | null;
   completedAt?: Date | null;
@@ -19,33 +18,15 @@ interface Project {
 interface ProjectsSectionProps {
   projects: Project[];
   onProjectClick: (project: Project) => void;
+  onViewAllProjects: () => void;
 }
 
-const containerVariants = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 1, y: 0 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-export default function ProjectsSection({ projects, onProjectClick }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects, onProjectClick, onViewAllProjects }: ProjectsSectionProps) {
   return (
     <section id="projects" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 1, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-14"
-        >
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             أعمالنا
           </div>
@@ -56,29 +37,22 @@ export default function ProjectsSection({ projects, onProjectClick }: ProjectsSe
             نفخر بإنجاز مجموعة من المشاريع المتميزة في مختلف مناطق المملكة
             العربية السعودية
           </p>
-        </motion.div>
+        </div>
 
         {/* Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <motion.div
+            <div
               key={project.id}
-              variants={cardVariants}
-              className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-card border"
+              className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-card border cursor-pointer"
             >
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
-                <Image
+                
+                <img
                   src={project.image}
                   alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Location badge */}
                 {project.location && (
@@ -117,9 +91,22 @@ export default function ProjectsSection({ projects, onProjectClick }: ProjectsSe
                   </p>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* View All Button */}
+        <div className="text-center mt-12">
+          <Button
+            onClick={onViewAllProjects}
+            size="lg"
+            variant="outline"
+            className="gap-2 text-base px-8 py-6 border-2 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+          >
+            <span>عرض جميع المشاريع</span>
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
     </section>
   );

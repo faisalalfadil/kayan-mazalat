@@ -9,6 +9,7 @@ import QuoteModal from '@/components/quote-modal';
 import ServiceDetailModal from '@/components/service-detail-modal';
 import ProjectDetailModal from '@/components/project-detail-modal';
 import BlogDetailModal from '@/components/blog-detail-modal';
+import PortfolioGallery from '@/components/portfolio-gallery';
 import Hero from '@/components/sections/hero-section';
 import AboutSection from '@/components/sections/about-section';
 import ServicesSection from '@/components/sections/services-section';
@@ -32,6 +33,7 @@ interface Project {
   title: string;
   description: string;
   image: string;
+  images?: string | null;
   location?: string | null;
   client?: string | null;
   completedAt?: string | null;
@@ -66,6 +68,7 @@ export default function HomeClient({
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [blogModalOpen, setBlogModalOpen] = useState(false);
+  const [portfolioOpen, setPortfolioOpen] = useState(false);
 
   const handleServiceClick = (service: Service) => {
     setSelectedService(service);
@@ -101,6 +104,7 @@ export default function HomeClient({
         <ProjectsSection
           projects={projects}
           onProjectClick={handleProjectClick}
+          onViewAllProjects={() => setPortfolioOpen(true)}
         />
 
         <StatsSection />
@@ -153,6 +157,12 @@ export default function HomeClient({
         post={selectedPost}
         open={blogModalOpen}
         onOpenChange={setBlogModalOpen}
+      />
+
+      {/* Portfolio Gallery */}
+      <PortfolioGallery
+        open={portfolioOpen}
+        onOpenChange={setPortfolioOpen}
       />
     </>
   );

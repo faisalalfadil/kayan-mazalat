@@ -134,3 +134,23 @@ All 8 tasks completed successfully:
 8. **Mobile Menu** - Changed Sheet to controlled component (`open`/`onOpenChange`). Wrapped all mobile nav links and the CTA button with `SheetClose` to auto-close the sheet on click.
 
 All changes passed ESLint with zero errors. Dev server confirmed operational.
+
+---
+## Task ID: 5
+### Work Task
+Create portfolio gallery page linked to projects with image upload support for admin.
+
+### Work Summary
+1. **Image Upload API** (`/src/app/api/admin/upload/route.ts`) - POST endpoint for multi-file upload with validation (type, size 5MB max). Saves to `/public/uploads/projects/`.
+2. **Portfolio Gallery** (`/src/components/portfolio-gallery.tsx`) - Full-screen overlay with search, featured filter, grid/list views, and project detail lightbox with keyboard navigation.
+3. **Projects Section** - Added "عرض جميع المشاريع" button, removed framer-motion dependency.
+4. **Home Client** - Integrated PortfolioGallery with state management.
+5. **Admin Projects Management** - Enhanced with drag & drop image upload, gallery preview, lightbox viewer, preview dialog.
+6. **Next.js Config** - Added remote image patterns for external URLs.
+7. **Lint** - Zero errors, zero warnings.
+
+Stage Summary:
+- Complete portfolio gallery system accessible from homepage
+- Admin can upload project images via drag & drop or file picker
+- Each project supports multiple images with lightbox gallery
+- All navigation flows work: homepage → gallery → project detail → contact
