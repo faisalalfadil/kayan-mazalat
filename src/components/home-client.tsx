@@ -18,6 +18,7 @@ import StatsSection from '@/components/sections/stats-section';
 import BlogSection from '@/components/sections/blog-section';
 import CtaSection from '@/components/sections/cta-section';
 import ContactForm from '@/components/contact-form';
+import type { SiteSettings } from '@/lib/types';
 
 interface Service {
   id: string;
@@ -48,25 +49,6 @@ interface BlogPost {
   content: string;
   published: boolean;
   createdAt: string;
-}
-
-export interface SiteSettings {
-  id: string;
-  companyName: string;
-  companyEnName: string;
-  phone: string;
-  phone2: string;
-  whatsapp: string;
-  email: string;
-  address: string;
-  workingHours: string;
-  twitter: string;
-  instagram: string;
-  linkedin: string;
-  youtube: string;
-  snapchat: string;
-  tiktok: string;
-  facebook: string;
 }
 
 const defaultSettings: SiteSettings = {

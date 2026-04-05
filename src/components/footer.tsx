@@ -3,7 +3,7 @@
 import { Building2, Phone, Mail, MapPin, Clock, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import type { SiteSettings } from '@/components/home-client';
+import type { SiteSettings } from '@/lib/types';
 
 const quickLinks = [
   { label: 'الرئيسية', href: '#home' },

@@ -1,6 +1,6 @@
 'use client';
 
-import type { SiteSettings } from '@/components/home-client';
+import type { SiteSettings } from '@/lib/types';
 
 interface WhatsAppButtonProps {
   chatOpen?: boolean;

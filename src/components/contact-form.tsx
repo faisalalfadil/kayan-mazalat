@@ -14,7 +14,7 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react';
-import type { SiteSettings } from '@/components/home-client';
+import type { SiteSettings } from '@/lib/types';
 
 interface ContactFormProps {
   settings?: SiteSettings;
