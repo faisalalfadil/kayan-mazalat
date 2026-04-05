@@ -182,3 +182,39 @@ Stage Summary:
 - Blog posts now support multiple images with drag & drop upload
 - PostgreSQL schema ready for Vercel deployment
 - All configuration files prepared for production deployment
+
+---
+## Task ID: 7
+### Work Task
+Add admin settings management system for controlling site-wide settings (phone numbers, WhatsApp, email, address, social media) and account management (change username/email/password).
+
+### Work Summary
+1. **SiteSettings Model** - Added new Prisma model with fields: companyName, companyEnName, phone, phone2, whatsapp, email, address, workingHours, twitter, instagram, linkedin, youtube, snapchat, tiktok, facebook. Pushed to SQLite database.
+
+2. **Public Settings API** (`/api/settings`) - GET endpoint that auto-creates default settings record if none exists. Returns site settings to public-facing components.
+
+3. **Admin Settings API** (`/api/admin/settings`) - GET/PUT endpoints for managing site settings. Auto-creates record on first GET.
+
+4. **Admin Account API** (`/api/admin/account`) - PUT endpoint for changing admin name, email, and password with validation (current password verification, password length check, email uniqueness check).
+
+5. **Settings Management Component** (`/src/components/admin/settings-management.tsx`) - Full settings page with two tabs:
+   - **Site Settings Tab**: Contact info (main phone + additional phone), WhatsApp number, email, address, working hours, company name (Arabic/English), social media links (7 platforms)
+   - **Account Settings Tab**: Change username, email (login credential), and password with confirmation fields and real-time validation
+
+6. **Admin Dashboard** - Added "الإعدادات" (Settings) nav item with Settings icon to sidebar. Wired up `onAdminUpdate` callback to update sidebar name/email immediately after account changes.
+
+7. **Dynamic Settings Integration**:
+   - `home-client.tsx` - Fetches settings from `/api/settings` on mount, exports `SiteSettings` interface
+   - `footer.tsx` - Now accepts `settings` prop, displays dynamic phone(s), email, address, working hours, social media links, company name. Phone numbers and email are clickable links.
+   - `whatsapp-button.tsx` - Now accepts `settings` prop, uses dynamic WhatsApp number with pre-filled message
+   - `contact-form.tsx` - Now accepts `settings` prop, shows additional phone number if configured, all contact info items are clickable links
+
+8. **Lint** - Zero errors. Dev server confirmed operational with `GET /api/settings 200`.
+
+Stage Summary:
+- Admin can now manage all site contact information and social media from dashboard
+- Admin can add an additional phone number
+- Admin can change WhatsApp number
+- Admin can change username, email (login), and password from the Settings page
+- All public components dynamically reflect settings changes
+- Phone/email links are clickable (tel: and mailto:)

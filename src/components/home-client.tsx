@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import WhatsAppButton from '@/components/whatsapp-button';
@@ -50,6 +50,44 @@ interface BlogPost {
   createdAt: string;
 }
 
+export interface SiteSettings {
+  id: string;
+  companyName: string;
+  companyEnName: string;
+  phone: string;
+  phone2: string;
+  whatsapp: string;
+  email: string;
+  address: string;
+  workingHours: string;
+  twitter: string;
+  instagram: string;
+  linkedin: string;
+  youtube: string;
+  snapchat: string;
+  tiktok: string;
+  facebook: string;
+}
+
+const defaultSettings: SiteSettings = {
+  id: '',
+  companyName: 'كيان القمة',
+  companyEnName: 'Kayn Al-Quma',
+  phone: '+966 50 000 0000',
+  phone2: '',
+  whatsapp: '966500000000',
+  email: 'info@kayanalqimah.com',
+  address: 'الرياض، المملكة العربية السعودية',
+  workingHours: 'الأحد - الخميس: 8:00 ص - 6:00 م',
+  twitter: '',
+  instagram: '',
+  linkedin: '',
+  youtube: '',
+  snapchat: '',
+  tiktok: '',
+  facebook: '',
+};
+
 interface HomeClientProps {
   services: Service[];
   projects: Project[];
@@ -61,6 +99,7 @@ export default function HomeClient({
   projects,
   blogPosts,
 }: HomeClientProps) {
+  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [serviceModalOpen, setServiceModalOpen] = useState(false);
@@ -70,6 +109,19 @@ export default function HomeClient({
   const [blogModalOpen, setBlogModalOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.settings) {
+          setSettings(data.settings);
+        }
+      })
+      .catch(() => {
+        // Use defaults
+      });
+  }, []);
 
   const handleServiceClick = (service: Service) => {
     setSelectedService(service);
@@ -132,14 +184,14 @@ export default function HomeClient({
                 فريقنا جاهز للإجابة على جميع أسئلتكم.
               </p>
             </div>
-            <ContactForm />
+            <ContactForm settings={settings} />
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer settings={settings} />
       <Chatbot onOpenChange={setChatOpen} />
-      <WhatsAppButton chatOpen={chatOpen} />
+      <WhatsAppButton chatOpen={chatOpen} settings={settings} />
 
       {/* Modals */}
       <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />

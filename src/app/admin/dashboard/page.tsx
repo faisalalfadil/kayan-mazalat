@@ -13,6 +13,7 @@ import {
   FileText,
   Users,
   MessageSquare,
+  Settings,
   LogOut,
   Building2,
   Menu,
@@ -24,6 +25,7 @@ import ProjectsManagement from '@/components/admin/projects-management'
 import BlogManagement from '@/components/admin/blog-management'
 import LeadsManagement from '@/components/admin/leads-management'
 import ChatMessages from '@/components/admin/chat-messages'
+import SettingsManagement from '@/components/admin/settings-management'
 
 interface AdminUser {
   id: string
@@ -32,7 +34,7 @@ interface AdminUser {
   role: string
 }
 
-type Section = 'home' | 'services' | 'projects' | 'blog' | 'leads' | 'chat'
+type Section = 'home' | 'services' | 'projects' | 'blog' | 'leads' | 'chat' | 'settings'
 
 const navItems: { key: Section; label: string; icon: React.ReactNode }[] = [
   { key: 'home', label: 'الرئيسية', icon: <LayoutDashboard className="w-5 h-5" /> },
@@ -41,6 +43,7 @@ const navItems: { key: Section; label: string; icon: React.ReactNode }[] = [
   { key: 'blog', label: 'المدونة', icon: <FileText className="w-5 h-5" /> },
   { key: 'leads', label: 'طلبات العملاء', icon: <Users className="w-5 h-5" /> },
   { key: 'chat', label: 'المحادثات', icon: <MessageSquare className="w-5 h-5" /> },
+  { key: 'settings', label: 'الإعدادات', icon: <Settings className="w-5 h-5" /> },
 ]
 
 function DashboardSidebar({ admin, activeSection, onSectionChange, onLogout }: {
@@ -156,6 +159,8 @@ export default function AdminDashboardPage() {
         return <LeadsManagement />
       case 'chat':
         return <ChatMessages />
+      case 'settings':
+        return <SettingsManagement admin={admin} onAdminUpdate={setAdmin} />
       default:
         return <DashboardHome />
     }

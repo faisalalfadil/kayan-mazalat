@@ -1,11 +1,19 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import type { SiteSettings } from '@/components/home-client';
 
-export default function WhatsAppButton({ chatOpen }: { chatOpen?: boolean }) {
+interface WhatsAppButtonProps {
+  chatOpen?: boolean;
+  settings?: SiteSettings;
+}
+
+export default function WhatsAppButton({ chatOpen, settings }: WhatsAppButtonProps) {
+  const whatsapp = settings?.whatsapp || '966500000000';
+  const phone = settings?.phone || '+966 50 000 0000';
+
   return (
     <a
-      href="https://wa.me/966500000000"
+      href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(`مرحباً، أريد الاستفسار عن خدماتكم. رقم الهاتف: ${phone}`)}`}
       target="_blank"
       rel="noopener noreferrer"
       className={`fixed bottom-24 left-6 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#20BA5C] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${chatOpen ? 'opacity-0 pointer-events-none scale-75' : 'opacity-100 animate-[fadeInUp_0.5s_ease-out_1.5s_both]'}`}

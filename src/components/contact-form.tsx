@@ -14,35 +14,13 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react';
+import type { SiteSettings } from '@/components/home-client';
 
-const contactInfo = [
-  {
-    icon: Phone,
-    label: 'الهاتف',
-    value: '+966 50 000 0000',
-    dir: 'ltr' as const,
-  },
-  {
-    icon: Mail,
-    label: 'البريد الإلكتروني',
-    value: 'info@kayanalqimah.com',
-    dir: 'ltr' as const,
-  },
-  {
-    icon: MapPin,
-    label: 'العنوان',
-    value: 'الرياض، المملكة العربية السعودية',
-    dir: 'rtl' as const,
-  },
-  {
-    icon: Clock,
-    label: 'ساعات العمل',
-    value: 'الأحد - الخميس: 8:00 ص - 6:00 م',
-    dir: 'rtl' as const,
-  },
-];
+interface ContactFormProps {
+  settings?: SiteSettings;
+}
 
-export default function ContactForm() {
+export default function ContactForm({ settings }: ContactFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -85,6 +63,50 @@ export default function ContactForm() {
     }
   };
 
+  const companyPhone = settings?.phone || '+966 50 000 0000';
+  const phone2 = settings?.phone2 || '';
+  const companyEmail = settings?.email || 'info@kayanalqimah.com';
+  const address = settings?.address || 'الرياض، المملكة العربية السعودية';
+  const workingHours = settings?.workingHours || 'الأحد - الخميس: 8:00 ص - 6:00 م';
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: 'الهاتف',
+      value: companyPhone,
+      href: `tel:${companyPhone.replace(/\s/g, '')}`,
+      dir: 'ltr' as const,
+    },
+    ...(phone2 ? [{
+      icon: Phone,
+      label: 'هاتف إضافي',
+      value: phone2,
+      href: `tel:${phone2.replace(/\s/g, '')}`,
+      dir: 'ltr' as const,
+    }] : []),
+    {
+      icon: Mail,
+      label: 'البريد الإلكتروني',
+      value: companyEmail,
+      href: `mailto:${companyEmail}`,
+      dir: 'ltr' as const,
+    },
+    {
+      icon: MapPin,
+      label: 'العنوان',
+      value: address,
+      href: '',
+      dir: 'rtl' as const,
+    },
+    {
+      icon: Clock,
+      label: 'ساعات العمل',
+      value: workingHours,
+      href: '',
+      dir: 'rtl' as const,
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
       {/* Contact Info */}
@@ -97,7 +119,7 @@ export default function ContactForm() {
         <div className="space-y-6">
           {contactInfo.map((item, index) => (
             <div
-              key={item.label}
+              key={item.label + index}
               className="flex items-start gap-4"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
@@ -107,12 +129,22 @@ export default function ContactForm() {
                 <div className="font-medium text-sm text-foreground">
                   {item.label}
                 </div>
-                <div
-                  className="text-muted-foreground text-sm mt-0.5"
-                  dir={item.dir}
-                >
-                  {item.value}
-                </div>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="text-muted-foreground text-sm mt-0.5 hover:text-primary transition-colors block"
+                    dir={item.dir}
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <div
+                    className="text-muted-foreground text-sm mt-0.5"
+                    dir={item.dir}
+                  >
+                    {item.value}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -122,7 +154,7 @@ export default function ContactForm() {
         <div className="mt-8 w-full h-48 rounded-xl bg-muted/50 border flex items-center justify-center overflow-hidden">
           <div className="text-center text-muted-foreground">
             <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
-            <p className="text-sm">الرياض، المملكة العربية السعودية</p>
+            <p className="text-sm">{address}</p>
           </div>
         </div>
       </div>
