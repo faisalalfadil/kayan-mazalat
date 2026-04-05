@@ -173,7 +173,7 @@ export default function PortfolioGallery({
 
           {/* Search & Filters */}
           <div className="flex items-center gap-3 mt-4 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
+            <div className="relative flex-1 min-w-[160px]">
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 value={search}
@@ -198,7 +198,7 @@ export default function PortfolioGallery({
                 <Button
                   variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-10 w-10"
                   onClick={() => setViewMode('grid')}
                 >
                   <Grid3X3 className="w-4 h-4" />
@@ -206,7 +206,7 @@ export default function PortfolioGallery({
                 <Button
                   variant={viewMode === 'list' ? 'secondary' : 'ghost'}
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-10 w-10"
                   onClick={() => setViewMode('list')}
                 >
                   <LayoutList className="w-4 h-4" />
@@ -261,7 +261,7 @@ export default function PortfolioGallery({
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-500" />
                       
                       {/* Location badge */}
                       {project.location && (
@@ -287,7 +287,7 @@ export default function PortfolioGallery({
                       )}
 
                       {/* Hover overlay content */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-0 flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 opacity-100 transition-opacity duration-500">
                         <Button
                           variant="secondary"
                           className="bg-white text-foreground hover:bg-white/90 shadow-lg gap-2"
@@ -443,7 +443,7 @@ function ProjectDetailOverlay({
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+        className="absolute top-4 left-4 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
       >
         <X className="w-5 h-5" />
       </button>

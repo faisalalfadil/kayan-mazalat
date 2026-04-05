@@ -1,17 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 
-export default function WhatsAppButton() {
-  const [isVisible, setIsVisible] = useState(true);
-
+export default function WhatsAppButton({ chatOpen }: { chatOpen?: boolean }) {
   return (
     <a
       href="https://wa.me/966500000000"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-24 left-6 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#20BA5C] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isVisible ? 'animate-[fadeInUp_0.5s_ease-out_1.5s_both]' : ''}`}
+      className={`fixed bottom-24 left-6 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#20BA5C] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${chatOpen ? 'opacity-0 pointer-events-none scale-75' : 'opacity-100 animate-[fadeInUp_0.5s_ease-out_1.5s_both]'}`}
       aria-label="تواصل معنا عبر واتساب"
     >
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">

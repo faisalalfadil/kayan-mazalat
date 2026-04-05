@@ -69,6 +69,7 @@ export default function HomeClient({
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [blogModalOpen, setBlogModalOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const handleServiceClick = (service: Service) => {
     setSelectedService(service);
@@ -137,8 +138,8 @@ export default function HomeClient({
       </main>
 
       <Footer />
-      <Chatbot />
-      <WhatsAppButton />
+      <Chatbot onOpenChange={setChatOpen} />
+      <WhatsAppButton chatOpen={chatOpen} />
 
       {/* Modals */}
       <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />

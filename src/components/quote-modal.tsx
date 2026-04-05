@@ -163,7 +163,7 @@ export default function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
                   </Select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-2">
                     <Label>السمك (مم)</Label>
                     <Select value={thickness} onValueChange={setThickness}>
@@ -200,7 +200,7 @@ export default function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
                         key={c.value}
                         type="button"
                         onClick={() => setColor(c.value)}
-                        className={`w-8 h-8 rounded-full border-2 transition-all ${
+                        className={`w-10 h-10 rounded-full border-2 transition-all ${
                           color === c.value
                             ? 'border-primary ring-2 ring-primary/30 scale-110'
                             : 'border-border hover:border-primary/50'
@@ -241,7 +241,7 @@ export default function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
                   بيانات التواصل
                 </h4>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-2">
                     <Label>الاسم الكامل *</Label>
                     <Input

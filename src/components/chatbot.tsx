@@ -17,7 +17,11 @@ const WELCOME_MESSAGE: Message = {
     'مرحباً! أنا المساعد الذكي لشركة كيان القمة. كيف يمكنني مساعدتك اليوم؟ يمكنني الإجابة على استفساراتك حول:\n\n• أسعار الساندوتش بانل\n• أنواع العزل الحراري\n• مدة التنفيذ\n• طلب عرض سعر',
 };
 
-export default function Chatbot() {
+interface ChatbotProps {
+  onOpenChange?: (isOpen: boolean) => void;
+}
+
+export default function Chatbot({ onOpenChange }: ChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState('');
@@ -26,6 +30,11 @@ export default function Chatbot() {
   const [hasError, setHasError] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleToggle = (open: boolean) => {
+    setIsOpen(open);
+    onOpenChange?.(open);
+  };
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -153,8 +162,8 @@ export default function Chatbot() {
                 </div>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
+                onClick={() => handleToggle(false)}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
                 aria-label="إغلاق المحادثة"
               >
                 <X className="w-4 h-4" />
@@ -254,7 +263,7 @@ export default function Chatbot() {
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="w-10 h-10 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+                  className="w-11 h-11 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
                   aria-label="إرسال"
                 >
                   <Send className="w-4 h-4" />
@@ -267,7 +276,7 @@ export default function Chatbot() {
 
       {/* Floating Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => handleToggle(!isOpen)}
         className="w-14 h-14 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 animate-[fadeInUp_0.5s_ease-out_1s_both]"
         aria-label="المساعد الذكي"
       >

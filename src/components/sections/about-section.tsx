@@ -69,7 +69,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
               viewport={{ once: true }}
-              className="absolute -bottom-6 -left-6 bg-primary text-white rounded-2xl p-5 shadow-xl"
+              className="absolute -bottom-4 right-2 sm:-right-6 bg-primary text-white rounded-2xl p-4 sm:p-5 shadow-xl"
             >
               <div className="text-3xl font-bold">+15</div>
               <div className="text-sm text-white/80">سنة من الخبرة</div>
