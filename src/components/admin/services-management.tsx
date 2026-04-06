@@ -207,7 +207,7 @@ export default function ServicesManagement() {
               className="pr-9"
             />
           </div>
-          <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleOpenAdd} className="bg-orange-500 hover:bg-orange-600">
             <Plus className="w-4 h-4 ml-2" />
             إضافة خدمة
           </Button>
@@ -368,7 +368,7 @@ export default function ServicesManagement() {
             </div>
             <Button
               onClick={handleSave}
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-orange-500 hover:bg-orange-600"
               disabled={saving}
             >
               {saving ? 'جاري الحفظ...' : editingId ? 'حفظ التعديلات' : 'إضافة الخدمة'}

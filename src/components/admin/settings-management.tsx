@@ -217,7 +217,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
       </div>
     )
   }
@@ -242,7 +242,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Phone className="w-5 h-5 text-blue-600" />
+                <Phone className="w-5 h-5 text-orange-500" />
                 معلومات الاتصال
               </CardTitle>
               <CardDescription>
@@ -337,7 +337,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Globe className="w-5 h-5 text-blue-600" />
+                <Globe className="w-5 h-5 text-orange-500" />
                 اسم الشركة
               </CardTitle>
               <CardDescription>
@@ -371,7 +371,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Globe className="w-5 h-5 text-blue-600" />
+                <Globe className="w-5 h-5 text-orange-500" />
                 وسائل التواصل الاجتماعي
               </CardTitle>
               <CardDescription>
@@ -452,7 +452,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
             <Button
               onClick={handleSaveSettings}
               disabled={saving}
-              className="bg-blue-600 hover:bg-blue-700 text-white min-w-[160px]"
+              className="bg-orange-500 hover:bg-orange-600 text-white min-w-[160px]"
             >
               {saving ? (
                 <>
@@ -475,7 +475,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <User className="w-5 h-5 text-blue-600" />
+                <User className="w-5 h-5 text-orange-500" />
                 معلومات الحساب
               </CardTitle>
               <CardDescription>
@@ -514,7 +514,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Lock className="w-5 h-5 text-blue-600" />
+                <Lock className="w-5 h-5 text-orange-500" />
                 تغيير كلمة المرور
               </CardTitle>
               <CardDescription>
@@ -576,7 +576,7 @@ export default function SettingsManagement({ admin, onAdminUpdate }: { admin: Ad
             <Button
               onClick={handleSaveAccount}
               disabled={savingAccount}
-              className="bg-blue-600 hover:bg-blue-700 text-white min-w-[160px]"
+              className="bg-orange-500 hover:bg-orange-600 text-white min-w-[160px]"
             >
               {savingAccount ? (
                 <>

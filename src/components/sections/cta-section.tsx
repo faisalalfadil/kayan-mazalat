@@ -37,7 +37,7 @@ export default function CtaSection({ onOpenQuote }: CtaSectionProps) {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
             جاهز لبدء
             <br />
-            <span className="text-blue-200">مشروعك؟</span>
+            <span className="text-orange-200">مشروعك؟</span>
           </h2>
           <p className="text-white/80 text-lg mb-10 leading-relaxed">
             تواصل معنا اليوم واحصل على استشارة مجانية وعرض سعر مناسب

@@ -24,7 +24,7 @@ interface Stats {
 
 const statusColors: Record<string, string> = {
   new: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  read: 'bg-blue-100 text-blue-800 border-blue-200',
+  read: 'bg-orange-50 text-orange-800 border-orange-100',
   replied: 'bg-green-100 text-green-800 border-green-200',
   closed: 'bg-gray-100 text-gray-800 border-gray-200',
 }
@@ -81,8 +81,8 @@ export default function DashboardHome() {
       title: 'الخدمات',
       value: stats?.services || 0,
       icon: <Wrench className="w-6 h-6" />,
-      color: 'bg-blue-500',
-      lightColor: 'bg-blue-50 text-blue-600',
+      color: 'bg-orange-500',
+      lightColor: 'bg-orange-50 text-orange-500',
     },
     {
       title: 'المشاريع',

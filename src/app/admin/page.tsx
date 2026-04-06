@@ -49,17 +49,17 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-4">
-      <Card className="w-full max-w-md shadow-xl border-blue-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-sky-50 p-4">
+      <Card className="w-full max-w-md shadow-xl border-orange-100">
         <CardHeader className="text-center space-y-4 pb-2">
-          <div className="mx-auto w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center">
+          <div className="mx-auto w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center">
             <Building2 className="w-8 h-8 text-white" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold text-blue-900">
+            <CardTitle className="text-2xl font-bold text-orange-900">
               كيان القمة
             </CardTitle>
-            <CardDescription className="text-blue-600 mt-1">
+            <CardDescription className="text-orange-600 mt-1">
               لوحة تحكم الإدارة
             </CardDescription>
           </div>
@@ -99,7 +99,7 @@ export default function AdminLoginPage() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white"
               disabled={loading}
             >
               {loading ? (

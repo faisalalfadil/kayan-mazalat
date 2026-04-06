@@ -56,12 +56,12 @@ function DashboardSidebar({ admin, activeSection, onSectionChange, onLogout }: {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="p-6 flex items-center gap-3">
-        <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+        <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
           <Building2 className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="font-bold text-blue-900 text-lg leading-tight">كيان القمة</h1>
-          <p className="text-xs text-blue-500">لوحة التحكم</p>
+          <h1 className="font-bold text-orange-900 text-lg leading-tight">كيان القمة</h1>
+          <p className="text-xs text-orange-500">لوحة التحكم</p>
         </div>
       </div>
 
@@ -76,7 +76,7 @@ function DashboardSidebar({ admin, activeSection, onSectionChange, onLogout }: {
               onClick={() => onSectionChange(item.key)}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === item.key
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-orange-500 text-white shadow-md'
                   : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
               }`}
             >
@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
   if (!admin) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" />
       </div>
     )
   }
@@ -191,8 +191,8 @@ export default function AdminDashboardPage() {
               </Button>
             </SheetTrigger>
           </Sheet>
-          <h1 className="font-bold text-blue-900 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-blue-600" />
+          <h1 className="font-bold text-orange-900 flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-orange-500" />
             كيان القمة
           </h1>
           <Button variant="ghost" size="icon" onClick={handleLogout}>

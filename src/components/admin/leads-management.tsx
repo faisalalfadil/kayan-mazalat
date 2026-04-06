@@ -54,7 +54,7 @@ interface Lead {
 
 const statusColors: Record<string, string> = {
   new: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  read: 'bg-blue-100 text-blue-800 border-blue-200',
+  read: 'bg-orange-50 text-orange-800 border-orange-100',
   replied: 'bg-green-100 text-green-800 border-green-200',
   closed: 'bg-gray-100 text-gray-800 border-gray-200',
 }
@@ -72,7 +72,7 @@ const typeLabels: Record<string, string> = {
 }
 
 const typeColors: Record<string, string> = {
-  contact: 'bg-blue-50 text-blue-700',
+  contact: 'bg-orange-50 text-orange-600',
   quote: 'bg-purple-50 text-purple-700',
 }
 
@@ -363,7 +363,7 @@ export default function LeadsManagement() {
               {viewLead.service && (
                 <div className="space-y-1">
                   <p className="text-xs text-gray-400">الخدمة المطلوبة</p>
-                  <p className="text-sm bg-blue-50 text-blue-700 p-2 rounded-lg">{viewLead.service}</p>
+                  <p className="text-sm bg-orange-50 text-orange-600 p-2 rounded-lg">{viewLead.service}</p>
                 </div>
               )}
 

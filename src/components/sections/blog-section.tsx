@@ -32,9 +32,9 @@ const cardVariants = {
 };
 
 const gradients = [
-  'from-blue-500 to-blue-700',
+  'from-orange-500 to-orange-700',
   'from-indigo-500 to-purple-600',
-  'from-cyan-500 to-blue-600',
+  'from-amber-400 to-sky-500',
 ];
 
 export default function BlogSection({ posts, onPostClick }: BlogSectionProps) {

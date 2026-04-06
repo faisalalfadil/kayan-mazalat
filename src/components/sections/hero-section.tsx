@@ -58,7 +58,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             كيان القمة
             <br />
-            <span className="bg-gradient-to-l from-blue-300 via-blue-400 to-blue-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-l from-orange-300 via-orange-400 to-sky-300 bg-clip-text text-transparent">
               للمظلات والديكورات
             </span>
           </h1>

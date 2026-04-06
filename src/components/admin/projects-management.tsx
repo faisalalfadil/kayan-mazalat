@@ -287,7 +287,7 @@ export default function ProjectsManagement() {
               className="pr-9"
             />
           </div>
-          <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleOpenAdd} className="bg-orange-500 hover:bg-orange-600">
             <Plus className="w-4 h-4 ml-2" />
             إضافة مشروع
           </Button>
@@ -319,7 +319,7 @@ export default function ProjectsManagement() {
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-blue-400 transition-all"
+                          className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-orange-300 transition-all"
                           onClick={() => {
                             setLightboxImages(images)
                             setLightboxIndex(0)
@@ -529,7 +529,7 @@ export default function ProjectsManagement() {
               <div
                 className={`
                   border-2 border-dashed rounded-xl p-6 text-center transition-colors cursor-pointer
-                  ${dragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}
+                  ${dragOver ? 'border-orange-500 bg-orange-50' : 'border-gray-300 hover:border-gray-400'}
                 `}
                 onClick={() => multiFileInputRef.current?.click()}
                 onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
@@ -542,7 +542,7 @@ export default function ProjectsManagement() {
                   }
                 }}
               >
-                <Upload className={`w-8 h-8 mx-auto mb-2 ${uploading ? 'animate-bounce text-blue-500' : 'text-gray-400'}`} />
+                <Upload className={`w-8 h-8 mx-auto mb-2 ${uploading ? 'animate-bounce text-orange-500' : 'text-gray-400'}`} />
                 <p className="text-sm text-gray-600">
                   {uploading ? 'جاري رفع الصور...' : 'اسحب الصور هنا أو اضغط للاختيار'}
                 </p>
@@ -633,7 +633,7 @@ export default function ProjectsManagement() {
             </div>
             <Button
               onClick={handleSave}
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-orange-500 hover:bg-orange-600"
               disabled={saving}
             >
               {saving ? 'جاري الحفظ...' : editingId ? 'حفظ التعديلات' : 'إضافة المشروع'}
@@ -697,7 +697,7 @@ export default function ProjectsManagement() {
                         setLightboxIndex(idx)
                       }}
                       className={`w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
-                        idx === lightboxIndex ? 'border-blue-500' : 'border-transparent'
+                        idx === lightboxIndex ? 'border-orange-500' : 'border-transparent'
                       }`}
                     >
                       

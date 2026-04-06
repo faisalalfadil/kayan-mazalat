@@ -114,7 +114,7 @@ export default function ChatMessages() {
                     onClick={() => handleSelectSession(session)}
                     className={`w-full text-right p-3 rounded-lg transition-colors ${
                       selectedSession === session.sessionId
-                        ? 'bg-blue-50 border border-blue-200'
+                        ? 'bg-orange-50 border border-orange-100'
                         : 'hover:bg-gray-50 border border-transparent'
                     }`}
                   >
@@ -173,7 +173,7 @@ export default function ChatMessages() {
                         <div
                           className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                             msg.role === 'user'
-                              ? 'bg-blue-100 text-blue-600'
+                              ? 'bg-orange-50 text-orange-500'
                               : 'bg-green-100 text-green-600'
                           }`}
                         >
@@ -186,14 +186,14 @@ export default function ChatMessages() {
                         <div
                           className={`max-w-[75%] rounded-2xl px-4 py-3 ${
                             msg.role === 'user'
-                              ? 'bg-blue-600 text-white rounded-tr-sm'
+                              ? 'bg-orange-500 text-white rounded-tr-sm'
                               : 'bg-gray-100 text-gray-900 rounded-tl-sm'
                           }`}
                         >
                           <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                           <p
                             className={`text-[10px] mt-1 ${
-                              msg.role === 'user' ? 'text-blue-200' : 'text-gray-400'
+                              msg.role === 'user' ? 'text-orange-100' : 'text-gray-400'
                             }`}
                           >
                             {new Date(msg.createdAt).toLocaleTimeString('ar-SA', {
