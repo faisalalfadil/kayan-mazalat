@@ -15,12 +15,12 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
+  'مظلات كهربائية متحركة',
+  'مظلات ثابتة',
   'ساندوتش بانل',
-  'عزل حراري',
-  'هناجر صناعية',
-  'مباني صناعية',
-  'صاج ومعادن',
-  'تصميم هندسي',
+  'ديكورات داخلية',
+  'واجهات زجاج وكلادينج',
+  'سواتر',
 ];
 
 interface FooterProps {
@@ -93,13 +93,11 @@ export default function Footer({ settings }: FooterProps) {
               </div>
               <div>
                 <div className="text-lg font-bold">{companyName}</div>
-                <div className="text-xs text-white/60">للحلول الإنشائية</div>
+                <div className="text-xs text-white/60">للمظلات والديكورات</div>
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              شركة متخصصة في توريد وتركيب الساندوتش بانل والعزل الحراري على مستوى
-              المملكة العربية السعودية. نقدم حلولاً إنشائية متكاملة بأعلى معايير
-              الجودة.
+              مؤسسة متخصصة في تصميم وتنفيذ المظلات الكهربائية وتركيب الساندوتش بانل والديكورات الداخلية على مستوى المملكة العربية السعودية. نقدم حلولاً متكاملة بأعلى معايير الجودة.
             </p>
             <div className="flex gap-3 flex-wrap">
               {displaySocials.map((social) => (

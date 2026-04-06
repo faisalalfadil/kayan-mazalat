@@ -9,6 +9,8 @@ import {
   Wrench,
   Ruler,
   ArrowLeft,
+  Sun,
+  Paintbrush,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -23,6 +25,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Ruler,
   PencilRuler: Ruler,
   HardHat: Wrench,
+  Sun,
+  Paintbrush,
+  PaintBrush: Paintbrush,
 };
 
 interface Service {
@@ -68,11 +73,10 @@ export default function ServicesSection({ services, onServiceClick }: ServicesSe
             خدماتنا
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            حلول إنشائية <span className="text-primary">متكاملة</span>
+            خدمات <span className="text-primary">متكاملة</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            نقدم مجموعة شاملة من الخدمات الإنشائية المتخصصة في توريد وتركيب
-            الساندوتش بانل والعزل الحراري بأعلى معايير الجودة
+            نقدم مجموعة شاملة من الخدمات المتخصصة في المظلات الكهربائية وتركيب الساندوتش بانل والديكورات الداخلية بأعلى معايير الجودة
           </p>
         </motion.div>
 

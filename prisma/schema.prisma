@@ -95,12 +95,12 @@ model ChatMessage {
 
 model SiteSettings {
   id             String   @id @default(cuid())
-  companyName    String   @default("كيان القمة")
-  companyEnName  String   @default("Kayn Al-Quma")
-  phone          String   @default("+966 50 000 0000")
-  phone2         String   @default("")
-  whatsapp       String   @default("966500000000")
-  email          String   @default("info@kayanalqimah.com")
+  companyName    String   @default("مؤسسة كيان القمة للمظلات والديكورات")
+  companyEnName  String   @default("Kayn Al-Quma for Awnings and Decorations")
+  phone          String   @default("0537639422")
+  phone2         String   @default("0566366447")
+  whatsapp       String   @default("966537639422")
+  email          String   @default("office@kayan-qemma.com")
   address        String   @default("الرياض، المملكة العربية السعودية")
   workingHours   String   @default("الأحد - الخميس: 8:00 ص - 6:00 م")
   twitter        String   @default("")

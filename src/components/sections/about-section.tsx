@@ -7,23 +7,23 @@ import { Shield, Star, DollarSign, Clock } from 'lucide-react';
 const features = [
   {
     icon: Shield,
-    title: 'خبرة واسعة',
-    description: 'أكثر من 15 عامًا من الخبرة في مجال الساندوتش بانل والعزل الحراري',
+    title: 'الخبرة والجودة',
+    description: 'سنوات من العمل المتقن والالتزام باستخدام أجود المواد المصنوعة وفقاً لأعلى المعايير',
   },
   {
     icon: Star,
-    title: 'جودة عالية',
-    description: 'نستخدم أجود المواد ونعمل بأعلى معايير الجودة العالمية',
+    title: 'فريق متخصص',
+    description: 'مهندسون وفنيون ذوو كفاءة عالية لضمان تنفيذ دقيق واحترافي',
+  },
+  {
+    icon: Clock,
+    title: 'خدمة ما بعد البيع',
+    description: 'متابعة دقيقة ومستمرة لضمان جودة العمل وكفاءة المواد المستخدمة',
   },
   {
     icon: DollarSign,
     title: 'أسعار تنافسية',
-    description: 'نقدم أفضل الأسعار مع الحفاظ على أعلى مستويات الجودة',
-  },
-  {
-    icon: Clock,
-    title: 'التزام بالمواعيد',
-    description: 'نلتزم بجدول زمني محدد لإنجاز مشاريعكم في الوقت المحدد',
+    description: 'نقدم لعملائنا أفضل الأسعار المتاحة في السوق مع الحفاظ الكامل على الجودة العالية',
   },
 ];
 
@@ -56,7 +56,7 @@ export default function AboutSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/about.png"
-                alt="كيان القمة للحلول الإنشائية"
+                alt="كيان القمة للمظلات والديكورات"
                 width={600}
                 height={450}
                 className="w-full h-auto object-cover"
@@ -87,19 +87,12 @@ export default function AboutSection() {
               من نحن
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-              شركة رائدة في مجال
+              كيان القمة: الريادة في حلول التظليل
               <br />
-              <span className="text-primary">الحلول الإنشائية</span>
+              <span className="text-primary">وواجهات المباني</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              كيان القمة هي شركة سعودية رائدة متخصصة في توريد وتركيب الساندوتش
-              بانل والعزل الحراري. نقدم حلولاً إنشائية متكاملة للقطاع الصناعي
-              والتجاري على مستوى المملكة العربية السعودية.
-            </p>
             <p className="text-muted-foreground leading-relaxed mb-10">
-              نمتلك فريقًا من المهندسين والفنيين المتخصصين ذوي الخبرة العالية،
-              ونحرص على استخدام أحدث التقنيات وأجود المواد لضمان تحقيق أعلى
-              مستويات الجودة في جميع مشاريعنا.
+              تأسست مؤسسة كيان القمة على مبدأ الجودة والابتكار، مقدمين حلولاً متكاملة لا تقتصر على المظلات والسواتر، بل تشمل أيضاً خبرتنا في تنفيذ واجهات الزجاج والكلادينج، لتوفير مظهر عصري وعملي للمباني. نلتزم بمعايير الجودة العالمية في جميع مشاريعنا.
             </p>
 
             {/* Features Grid */}

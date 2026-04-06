@@ -41,7 +41,7 @@ export default function CtaSection({ onOpenQuote }: CtaSectionProps) {
           </h2>
           <p className="text-white/80 text-lg mb-10 leading-relaxed">
             تواصل معنا اليوم واحصل على استشارة مجانية وعرض سعر مناسب
-            لمشروعك. فريقنا جاهز لمساعدتك في تحقيق رؤيتك الإنشائية.
+            لمشروعك. فريقنا جاهز لمساعدتك في تصميم وتنفيذ أرقى المظلات والديكورات.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button

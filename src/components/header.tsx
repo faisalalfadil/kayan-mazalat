@@ -107,7 +107,7 @@ export default function Header({ onOpenQuote }: HeaderProps) {
                 'text-[10px] font-medium leading-tight transition-colors duration-300',
                 scrolled ? 'text-muted-foreground' : 'text-white/70'
               )}>
-                للحلول الإنشائية
+                للمظلات والديكورات
               </span>
             </div>
           </a>
@@ -182,7 +182,7 @@ export default function Header({ onOpenQuote }: HeaderProps) {
                 </div>
                 <div>
                   <div className="font-bold text-primary">كيان القمة</div>
-                  <div className="text-xs text-muted-foreground">للحلول الإنشائية</div>
+                  <div className="text-xs text-muted-foreground">للمظلات والديكورات</div>
                 </div>
               </SheetTitle>
               <nav className="flex flex-col gap-1 mt-4">

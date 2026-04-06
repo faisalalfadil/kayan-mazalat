@@ -218,3 +218,117 @@ Stage Summary:
 - Admin can change username, email (login), and password from the Settings page
 - All public components dynamically reflect settings changes
 - Phone/email links are clickable (tel: and mailto:)
+
+---
+## Task ID: 8
+### Work Task
+Update ALL frontend components to match the real company branding for "مؤسسة كيان القمة للمظلات والديكورات" (Awnings & Decorations company).
+
+### Work Summary
+Updated 7 files with text-only changes (no structural/logic modifications):
+
+1. **`src/app/layout.tsx`** - Updated metadata:
+   - Title: "مؤسسة كيان القمة للمظلات والديكورات"
+   - Description: Updated to reflect awnings and decorations specialization
+   - Keywords: Replaced construction keywords with awnings/decorations keywords (مظلات, مظلات كهربائية, ديكورات, واجهات زجاج, كلادينج)
+   - OpenGraph & Twitter cards: Updated titles and descriptions
+   - Structured data: Changed `@type` from `ConstructionCompany` to `HomeAndConstructionBusiness`, updated name and service types
+
+2. **`src/components/header.tsx`** - Changed subtitle from "للحلول الإنشائية" to "للمظلات والديكورات" in both desktop logo (line 110) and mobile menu (line 185)
+
+3. **`src/components/sections/hero-section.tsx`** - Multiple updates:
+   - Alt text updated to "كيان القمة للمظلات والديكورات"
+   - Badge: "نخدمكم في جميع أنحاء المملكة" → "أكثر من 15 عاماً من الخبرة"
+   - Gradient heading: "للحلول الإنشائية" → "للمظلات والديكورات"
+   - Subheading: Full new descriptive paragraph about awnings, electric motorized systems, and interior decorations
+
+4. **`src/components/sections/about-section.tsx`** - Major rewrite of content:
+   - Section title: "كيان القمة: الريادة في حلول التظليل وواجهات المباني"
+   - Description: New single paragraph about the company's foundation on quality/innovation principles, covering awnings, canopies, glass facades, and cladding
+   - 4 updated features: الخبرة والجودة, فريق متخصص, خدمة ما بعد البيع, أسعار تنافسية
+   - Alt text updated
+
+5. **`src/components/sections/services-section.tsx`** - Updated heading and description:
+   - Section heading: "حلول إنشائية متكاملة" → "خدمات متكاملة"
+   - Description: Updated to mention المظلات الكهربائية, الساندوتش بانل, and الديكورات الداخلية
+   - Added `Sun` and `Paintbrush` icons to the iconMap with aliases
+
+6. **`src/components/sections/stats-section.tsx`** - ✅ Already accurate (15+ years, 500+ projects, 200+ clients, 50+ team members) - no changes needed
+
+7. **`src/components/sections/cta-section.tsx`** - Updated description text: "تحقيق رؤيتك الإنشائية" → "تصميم وتنفيذ أرقى المظلات والديكورات"
+
+8. **`src/components/footer.tsx`** - Updated fallback values:
+   - Subtitle: "للحلول الإنشائية" → "للمظلات والديكورات"
+   - Company description: Updated to mention المظلات الكهربائية, الساندوتش بانل, and الديكورات الداخلية
+   - Service links: Updated to match real services (مظلات كهربائية متحركة, مظلات ثابتة, ساندوتش بانل, ديكورات داخلية, واجهات زجاج وكلادينج, سواتر)
+
+9. **Lint**: Zero errors, zero warnings.
+
+---
+## Task ID: 9
+### Work Task
+Update database seed data and Prisma schema defaults with REAL company information for مؤسسة كيان القمة للمظلات والديكورات.
+
+### Work Summary
+Updated 3 files and ran 3 commands successfully:
+
+1. **`prisma/schema.prisma`** - Updated SiteSettings model defaults:
+   - `companyName`: "كيان القمة" → "مؤسسة كيان القمة للمظلات والديكورات"
+   - `companyEnName`: "Kayn Al-Quma" → "Kayn Al-Quma for Awnings and Decorations"
+   - `phone`: "+966 50 000 0000" → "0537639422"
+   - `phone2`: "" → "0566366447"
+   - `whatsapp`: "966500000000" → "966537639422"
+   - `email`: "info@kayanalqimah.com" → "office@kayan-qemma.com"
+
+2. **`prisma/seed.ts`** - Complete rewrite with real company data:
+   - Admin user: Kept as-is (admin@kayan.com / admin123)
+   - SiteSettings: Added explicit seeding with all real contact info
+   - **Services**: Reduced from 6 to 3 real services:
+     - المظلات الكهربائية المتحركة (icon: Sun)
+     - تركيب ساندوتش بانل (icon: Layers)
+     - الديكورات الداخلية المتكاملة (icon: Paintbrush)
+   - **Projects**: Reduced from 4 to 3 real projects:
+     - مشروع ديكور فيلا - حي النرجس (project1.png)
+     - مشروع مظلة سيارة - طريق الملك فهد (project2.png)
+     - مشروع تركيب ساندوتش بانل - حي الخليج (project3.png)
+   - **Blog Posts**: Replaced all 3 with real content:
+     - الدليل الشامل للمظلات الكهربائية (slug: electric-awnings-guide)
+     - دليل شامل لواجهات الكلادينج 2025 (slug: cladding-guide-2025)
+     - دليل شامل للديكورات الخارجية 2025 (slug: exterior-decoration-guide-2025)
+
+3. **`package.json`** - Added seed command configuration:
+   - Added `"db:seed": "bun run prisma/seed.ts"` to scripts
+   - Added `"prisma": { "seed": "bun run prisma/seed.ts" }` for prisma seed support
+
+4. **Commands executed**:
+   - `bun run db:push` ✅ - Schema synced to SQLite
+   - `bun run prisma db seed` ✅ - All data seeded (1 admin, 1 site settings, 3 services, 3 projects, 3 blog posts)
+   - `bun run lint` ✅ - Zero errors
+
+---
+Task ID: 8
+Agent: main
+Task: Update entire website with real company data from kayan-qemma.com
+
+Work Log:
+- Fetched real website content from https://kayan-qemma.com/ (homepage) and https://kayan-qemma.com/تركيب-ساندوتش-بانل/ (sandwich panel page)
+- Extracted real company information: name, phone numbers, email, services, projects, blog posts
+- Updated Prisma schema SiteSettings defaults with real contact info
+- Rewrote seed.ts with 3 real services, 3 real projects, 3 real blog posts, correct site settings
+- Updated header.tsx: subtitle changed from "للحلول الإنشائية" to "للمظلات والديكورات"
+- Updated hero-section.tsx: new heading, description about awnings and decorations, badge text
+- Updated about-section.tsx: new title about "حلول التظليل وواجهات المباني", real company description, 4 updated features
+- Updated services-section.tsx: new description, added Sun/Paintbrush icons
+- Updated cta-section.tsx: reference to "المظلات والديكورات"
+- Updated footer.tsx: company description and service links
+- Updated layout.tsx: title, description, structured data
+- Reset database, re-seeded with correct data
+- Verified all APIs return correct data
+
+Stage Summary:
+- All website content now matches the real kayan-qemma.com website
+- Services: المظلات الكهربائية المتحركة, تركيب ساندوتش بانل, الديكورات الداخلية المتكاملة
+- Contact: 0537639422, 0566366447, office@kayan-qemma.com, WhatsApp 966537639422
+- Projects: ديكور فيلا (حي النرجس), مظلة سيارة (طريق الملك فهد), ساندوتش بانل (حي الخليج)
+- Blog: 3 real articles about awnings, cladding, and exterior decoration
+- All content in Arabic RTL, lint passes with zero errors
