@@ -23,9 +23,9 @@ import { Calculator, Loader2, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const panelTypes = [
-  { value: 'standard', label: 'ساندوتش بانل عادي', price: 85 },
-  { value: 'thermal', label: 'ساندوتش بانل عزل حراري', price: 120 },
-  { value: 'acoustic', label: 'ساندوتش بانل عزل صوتي', price: 150 },
+  { value: 'mullay', label: 'بديل شيبود مُلاي', price: 65 },
+  { value: 'mullay-3d', label: 'بديل شيبود مُلاي ثلاثي الأبعاد', price: 85 },
+  { value: 'mullay-premium', label: 'بديل شيبود مُلاي بريميوم', price: 110 },
 ];
 
 const thicknesses = [40, 50, 60, 75, 80, 100, 120, 150, 200];

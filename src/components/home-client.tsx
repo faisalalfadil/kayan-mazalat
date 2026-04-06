@@ -10,6 +10,7 @@ import ServiceDetailModal from '@/components/service-detail-modal';
 import ProjectDetailModal from '@/components/project-detail-modal';
 import BlogDetailModal from '@/components/blog-detail-modal';
 import PortfolioGallery from '@/components/portfolio-gallery';
+import ServiceLandingPage from '@/components/service-landing-page';
 import Hero from '@/components/sections/hero-section';
 import AboutSection from '@/components/sections/about-section';
 import ServicesSection from '@/components/sections/services-section';
@@ -24,7 +25,10 @@ import type { SiteSettings } from '@/lib/types';
 interface Service {
   id: string;
   title: string;
+  titleEn?: string | null;
+  slug: string;
   description: string;
+  descriptionEn?: string | null;
   icon: string;
   image?: string | null;
   order: number;
@@ -93,6 +97,10 @@ export default function HomeClient({
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
 
+  // Navigation state: 'home' shows homepage, 'service' shows landing page
+  const [currentView, setCurrentView] = useState<'home' | 'service'>('home');
+  const [landingService, setLandingService] = useState<Service | null>(null);
+
   useEffect(() => {
     fetch('/api/settings')
       .then((res) => res.json())
@@ -106,9 +114,18 @@ export default function HomeClient({
       });
   }, []);
 
+  // Navigate to service landing page
   const handleServiceClick = (service: Service) => {
-    setSelectedService(service);
-    setServiceModalOpen(true);
+    setLandingService(service);
+    setCurrentView('service');
+    window.scrollTo(0, 0);
+  };
+
+  // Navigate back to home from landing page
+  const handleBackToHome = () => {
+    setCurrentView('home');
+    setLandingService(null);
+    window.scrollTo(0, 0);
   };
 
   const handleProjectClick = (project: Project) => {
@@ -122,6 +139,29 @@ export default function HomeClient({
   };
 
   const handleOpenQuote = () => setQuoteOpen(true);
+
+  // If viewing a service landing page, render it instead
+  if (currentView === 'service' && landingService) {
+    return (
+      <>
+        <ServiceLandingPage
+          service={landingService}
+          settings={{
+            phone: settings.phone || '0537639422',
+            phone2: settings.phone2 || undefined,
+            whatsapp: settings.whatsapp || '966537639422',
+            email: settings.email || 'office@kayan-qemma.com',
+            companyName: settings.companyName || 'كيان القمة',
+          }}
+          onBack={handleBackToHome}
+          onOpenQuote={handleOpenQuote}
+        />
+        <Chatbot onOpenChange={setChatOpen} />
+        <WhatsAppButton chatOpen={chatOpen} settings={settings} />
+        <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />
+      </>
+    );
+  }
 
   return (
     <>

@@ -58,8 +58,8 @@ export default function BlogSection({ posts, onPostClick }: BlogSectionProps) {
             آخر <span className="text-primary">المقالات</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            اطلع على أحدث المقالات والمعلومات حول عالم الساندوتش بانل والحلول
-            الإنشائية
+            اطلع على أحدث المقالات والمعلومات حول عالم المظلات والديكورات والحلول
+            المتكاملة
           </p>
         </motion.div>
 

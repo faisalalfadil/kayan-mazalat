@@ -393,3 +393,92 @@ Stage Summary:
 - Services section with gradient overlay cards
 - Hero with service pill badges
 - Zero lint errors, all pages return 200
+
+---
+Task ID: 6
+Agent: general-purpose
+Task: Update all ساندوتش بانل references across site
+
+Work Log:
+- Updated layout.tsx: keywords array ("ساندوتش بانل" → "بديل شيبود مُلاي"), JSON-LD serviceType ("تركيب ساندوتش بانل" → "بديل الشيبود مُلاي")
+- Updated hero-section.tsx: servicePills ("ساندوتش بانل" → "بديل شيبود مُلاي"), subheading ("والساندوتش بانل" → "وبديل الشيبود مُلاي")
+- Updated about-section.tsx: first paragraph removed "واجهات الزجاج والكلادينج" reference, second paragraph replaced "تركيب ألواح الساندوتش بانل للمستودعات والهناجر" → "بديل الشيبود مُلاي بتصاميم عصرية ومتانة عالية"
+- Updated services-section.tsx: description ("وتركيب الساندوتش بانل" → "وبديل الشيبود مُلاي")
+- Updated blog-section.tsx: section description ("عالم الساندوتش بانل والحلول الإنشائية" → "عالم المظلات والديكورات والحلول المتكاملة")
+- Updated footer.tsx: serviceLinks ("ساندوتش بانل" → "بديل شيبود مُلاي"), company description ("وتركيب الساندوتش بانل" → "وبديل الشيبود مُلاي")
+- Updated chatbot.tsx: welcome message ("أسعار الساندوتش بانل" → "خدمات المظلات والديكورات", "أنواع العزل الحراري" → "أنواع الديكورات")
+- Updated quote-modal.tsx: panelTypes array replaced with 3 new Mullay options (بديل شيبود مُلاي, ثلاثي الأبعاد, بريميوم) with prices 65/85/110
+- Updated api/chat/route.ts: entire SYSTEM_PROMPT rewritten to cover المظلات الكهربائية, بديل الشيبود مُلاي, and الديكورات الداخلية with correct contact info
+- Verified zero remaining "ساندوتش" references across src/ directory
+- Lint passes with zero errors
+
+Stage Summary:
+- All 9 files updated successfully
+- Zero remaining "ساندوتش بانل" references in the codebase
+- New service "بديل الشيبود مُلاي" consistently referenced across all UI, metadata, chatbot, and API
+- Lint: zero errors
+
+---
+Task ID: 4
+Agent: fullstack-dev
+Task: Create service landing page component
+
+Work Log:
+- Read worklog.md and analyzed existing project structure, component patterns, and styling conventions
+- Studied existing shadcn/ui components (accordion, button, card, badge), Prisma schema, and type definitions
+- Reviewed hero-section.tsx and services-section.tsx for design pattern consistency
+- Created comprehensive `/src/components/service-landing-page.tsx` component (~700 lines) with 9 sections:
+  1. **Sticky Navigation Bar**: Company name/logo on right, "الرئيسية" link, "طلب عرض سعر" CTA, phone number. Background transitions from transparent to solid white on scroll.
+  2. **Hero Section**: Full-height with gradient overlay, service icon badge, large title, English subtitle, tagline, 2 CTA buttons (contact + quote), animated scroll-down indicator. Falls back to gradient background when no service image.
+  3. **Service Overview Section**: 2-column layout with Arabic description paragraphs (3 per service) and 4 stats cards in a 2x2 grid.
+  4. **Service Features/Types Section**: Responsive grid of feature cards with gradient top bar, icon, title, description. Interior decoration uses 5-column grid, others use 3-column.
+  5. **Advantages Section**: 4-column grid of advantage cards with icon, title, description. Each card has hover effects on icon container.
+  6. **Work Process Section**: 4-step process cards (الاستشارة → المعاينة → التصميم → التنفيذ) with numbered badges and connecting gradient line on desktop.
+  7. **FAQ Section**: shadcn Accordion with 6 service-specific Q&A items per service, styled with rounded-xl items and open state shadow/border.
+  8. **CTA Section**: Orange gradient background with SVG pattern overlay, decorative blur circles, contact info, 2 CTA buttons (call + WhatsApp).
+  9. **Minimal Footer**: Company info, quick links (home, quote, phone), copyright notice.
+- Service-specific content for 3 services:
+  - **electric-awnings**: 6 features (cassette, folding arm, pergola, patio, car park, window), 6 FAQs
+  - **mullay-sheboud**: 6 features (wall panels, ceiling, 3D, bathroom, LED, custom), 6 FAQs
+  - **interior-decoration**: 10 features (wood alt, marble alt, SPC parquet, gypsum, 3D wallpaper, foam, mullay panels, mirrors, TV backgrounds, bed headboards), 6 FAQs
+- Used framer-motion for scroll-triggered animations (fadeInUp, staggerContainer, staggerItem variants)
+- All Lucide icons properly imported; removed unused imports (ChevronDown, Truck, ScrollText, CircleCheck)
+- Used `<img>` tags (not next/image) per project convention
+- Added `window.scrollTo(0, 0)` in useEffect for scroll-to-top on mount
+- Ran `bun run lint` - zero errors, zero warnings
+- Dev server confirmed operational with successful compilation
+
+Stage Summary:
+- Created `/src/components/service-landing-page.tsx` - comprehensive standalone service landing page
+- 9 distinct sections with full Arabic RTL content
+- Service-specific content for all 3 services (electric-awnings, mullay-sheboud, interior-decoration)
+- Responsive design (mobile-first: sm, md, lg, xl breakpoints)
+- Orange primary + sky blue secondary color scheme matching project theme
+- framer-motion scroll animations throughout
+- shadcn/ui components: Button, Accordion, Card, Badge
+- Zero lint errors
+
+---
+Task ID: 5
+Agent: main
+Task: Replace ساندوتش بانل with بديل الشيبود مُلاي and create service landing pages
+
+Work Log:
+- Added `slug` field (String, @unique) to Service model in prisma/schema.prisma
+- Updated prisma/seed.ts: replaced ساندوتش بانل service with بديل الشيبود مُلاي (id: 2, slug: mullay-sheboud)
+- Updated project 3 from "ساندوتش بانل - حي الخليج" to "بديل شيبود مُلاي - حي العليا"
+- Updated blog post 2 from كلادينج guide to مُلاي guide (slug: mullay-sheboud-guide)
+- Updated blog post 3 from exterior decoration to interior decoration guide
+- Created comprehensive service-landing-page.tsx component (~700 lines, 9 sections each)
+- Updated home-client.tsx: added currentView state ('home' | 'service'), imports ServiceLandingPage, navigates to full landing page on service click
+- Updated admin service API POST/PUT routes to handle slug field
+- Updated all ساندوتش بانل references across 9 files (layout, hero, about, services, blog, footer, chatbot, quote-modal, chat API)
+- Reset database, re-pushed schema, re-seeded with new data
+- Verified: GET / 200, slug in Prisma queries, zero lint errors
+
+Stage Summary:
+- Services now: المظلات الكهربائية المتحركة (electric-awnings), بديل الشيبود مُلاي (mullay-sheboud), الديكورات الداخلية المتكاملة (interior-decoration)
+- Each service opens in its own standalone landing page with: hero, overview, features, advantages, process steps, FAQ, CTA, footer
+- Navigation back to homepage via logo click or "الرئيسية" button
+- All ساندوتش بانل references removed from codebase
+- Zero lint errors, homepage returns 200

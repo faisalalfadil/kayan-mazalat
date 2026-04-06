@@ -8,13 +8,14 @@ export async function PUT(
   try {
     const { id } = await params
     const body = await request.json()
-    const { title, titleEn, description, descriptionEn, icon, image, order, isActive } = body
+    const { title, titleEn, slug, description, descriptionEn, icon, image, order, isActive } = body
 
     const service = await db.service.update({
       where: { id },
       data: {
         ...(title !== undefined && { title }),
         ...(titleEn !== undefined && { titleEn: titleEn || null }),
+        ...(slug !== undefined && { slug }),
         ...(description !== undefined && { description }),
         ...(descriptionEn !== undefined && { descriptionEn: descriptionEn || null }),
         ...(icon !== undefined && { icon }),

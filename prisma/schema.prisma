@@ -21,6 +21,7 @@ model Service {
   id          String   @id @default(cuid())
   title       String
   titleEn     String?
+  slug        String   @unique
   description String
   descriptionEn String?
   icon        String
