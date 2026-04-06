@@ -1,15 +1,17 @@
 import { db } from '../src/lib/db'
+import { hashPassword } from '../src/lib/auth'
 
 async function main() {
   console.log('🌱 Seeding database...')
 
   // ─── 1. Admin User ───────────────────────────────────────────────
+  const hashedPassword = await hashPassword('admin123')
   const admin = await db.admin.upsert({
     where: { email: 'admin@kayan.com' },
     update: {},
     create: {
       email: 'admin@kayan.com',
-      password: 'admin123',
+      password: hashedPassword,
       name: 'مدير النظام',
       role: 'admin',
     },
