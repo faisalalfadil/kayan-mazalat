@@ -24,7 +24,7 @@ export function MetaPreview({
   const displayTitle = metaTitle || title
   const displayDescription = metaDescription || 'اقرأ المزيد على موقعنا'
   const displayUrl = `https://kayan-mazalat.com/blog/${slug || 'article'}`
-  const displayImage = image || '/images/default-blog.jpg'
+  const displayImage = image || '/images/default-blog.svg'
 
   return (
     <Card>

@@ -1,0 +1,5 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#f97316"/>
+  <text x="100" y="85" font-family="Arial, sans-serif" font-size="48" fill="white" text-anchor="middle" font-weight="bold">كيان</text>
+  <text x="100" y="125" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="bold">مزلات</text>
+</svg>

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = post.metaTitle || post.title
   const description = post.metaDescription || post.excerpt || ''
-  const image = post.image || '/images/default-blog.jpg'
+  const image = post.image || '/images/default-blog.svg'
 
   return {
     title: `${title} - كيان مزلات`,
