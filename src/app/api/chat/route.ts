@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import ZAI from 'z-ai-web-dev-sdk';
 import { v4 as uuidv4 } from 'uuid';
 
 const SYSTEM_PROMPT = `أنت مساعد ذكي لشركة كيان القمة المتخصصة في المظلات الكهربائية وبديل الشيبود والديكورات الداخلية في المملكة العربية السعودية. أجب باللغة العربية. كن ودوداً ومحترفاً.
@@ -77,17 +76,33 @@ export async function POST(request: NextRequest) {
       })),
     ];
 
-    // Call z-ai-web-dev-sdk
-    const zai = await ZAI.create();
-    const response = await zai.chat.completions.create({
-      model: 'deepseek-chat',
-      messages: aiMessages,
+    // Call OpenRouter API directly
+    const openrouterApiKey = process.env.OPENROUTER_API_KEY;
+
+    if (!openrouterApiKey) {
+      throw new Error('OPENROUTER_API_KEY not configured');
+    }
+
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openrouterApiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://kayan-mazalat.com',
+        'X-Title': 'Kayan Mazalat Chatbot',
+      },
+      body: JSON.stringify({
+        model: 'deepseek/deepseek-chat',
+        messages: aiMessages,
+      }),
     });
 
-    const assistantMessage =
-      response?.choices?.[0]?.message?.content ||
-      response?.message?.content ||
-      'عذراً، حدث خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.';
+    if (!response.ok) {
+      throw new Error(`OpenRouter API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const assistantMessage = data?.choices?.[0]?.message?.content || 'عذراً، حدث خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.';
 
     // Save assistant message
     await db.chatMessage.create({
