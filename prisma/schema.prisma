@@ -18,16 +18,31 @@ model Admin {
 }
 
 model Service {
-  id          String   @id @default(cuid())
+  id          String          @id @default(cuid())
   title       String
   titleEn     String?
-  slug        String   @unique
+  slug        String          @unique
   description String
   descriptionEn String?
   icon        String
   image       String?
-  order       Int      @default(0)
-  isActive    Boolean  @default(true)
+  order       Int             @default(0)
+  isActive    Boolean         @default(true)
+  content     ServiceContent?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model ServiceContent {
+  id          String   @id @default(cuid())
+  serviceId   String   @unique
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  heroTagline String   @default("")
+  overview    String   @default("[]")
+  stats       String   @default("[]")
+  features    String   @default("[]")
+  advantages  String   @default("[]")
+  faqs        String   @default("[]")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

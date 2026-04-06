@@ -53,6 +53,15 @@ import {
 
 // ─── Props ───────────────────────────────────────────────────────────────────
 
+export interface ServiceContentData {
+  heroTagline: string;
+  overview: string[];
+  stats: { value: string; label: string; icon: string }[];
+  features: { title: string; description: string; icon: string }[];
+  advantages: { title: string; description: string; icon: string }[];
+  faqs: { question: string; answer: string }[];
+}
+
 interface ServiceLandingPageProps {
   service: {
     id: string;
@@ -72,6 +81,7 @@ interface ServiceLandingPageProps {
     email: string;
     companyName: string;
   };
+  content?: ServiceContentData;
   onBack: () => void;
   onOpenQuote: () => void;
 }
@@ -99,6 +109,20 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Hammer,
   Ruler,
   Lightbulb,
+  // Additional icons used in DB content
+  ArrowLeftRight,
+  Home,
+  Maximize,
+  ShieldCheck,
+  Award,
+  Users,
+  DollarSign,
+  Eye,
+  Star,
+  Clock,
+  HeadphonesIcon,
+  Zap,
+  MessageCircle,
 };
 
 // ─── Service Content Data ────────────────────────────────────────────────────
@@ -209,9 +233,9 @@ const serviceContentMap: Record<string, ServiceContent> = {
   'mullay-sheboud': {
     heroTagline: 'بديل عصري ومبتكر للشيبود التقليدي بألوان وتصاميم متنوعة تناسب جميع المساحات',
     overview: [
-      'ألواح مُلاي هي البديل المثالي للشيبود التقليدي، مصنوعة من مواد PVC عالية الجودة المقاومة للماء والرطوبة والحشرات. تتميز بسهولة التركيب والتنظيف وعمر افتراضي أطول بكثير مقارنة بالشيبود العادي.',
-      'تتوفر ألواح مُلاي بمجموعة واسعة من التصاميم والألوان العصرية التي تناسب جميع أنواع المساحات الداخلية، من الجدران والأسقف إلى الحمامات والمطابخ. كما يمكن دمجها مع إضاءة LED مخفية لإضفاء لمسة ساحرة على ديكورك.',
-      'في كيان القمة، نقدم حلولاً متكاملة بألواح مُلاي تشمل التصميم والتركيب بمعايير احترافية عالية. فريقنا المتخصص يضمن لك نتيجة نهائية تعكس ذوقك الرفيع وتلبي توقعاتك.',
+      'ألواح الشيبود هي البديل المثالي للشيبود التقليدي، مصنوعة من مواد PVC عالية الجودة المقاومة للماء والرطوبة والحشرات. تتميز بسهولة التركيب والتنظيف وعمر افتراضي أطول بكثير مقارنة بالشيبود العادي.',
+      'تتوفر ألواح الشيبود بمجموعة واسعة من التصاميم والألوان العصرية التي تناسب جميع أنواع المساحات الداخلية، من الجدران والأسقف إلى الحمامات والمطابخ. كما يمكن دمجها مع إضاءة LED مخفية لإضفاء لمسة ساحرة على ديكورك.',
+      'في كيان القمة، نقدم حلولاً متكاملة بألواح الشيبود تشمل التصميم والتركيب بمعايير احترافية عالية. فريقنا المتخصص يضمن لك نتيجة نهائية تعكس ذوقك الرفيع وتلبي توقعاتك.',
     ],
     stats: [
       { value: '+300', label: 'مشروع منجز', icon: Hammer },
@@ -221,28 +245,28 @@ const serviceContentMap: Record<string, ServiceContent> = {
     ],
     features: [
       {
-        title: 'ألواح مُلاي للجدران',
+        title: 'ألواح الشيبود للجدران',
         description: 'ألواح بتصاميم متنوعة لتغطية الجدران وإضفاء مظهر عصري وأنيق',
         icon: LayoutGrid,
       },
       {
-        title: 'ألواح مُلاي للأسقف',
+        title: 'ألواح الشيبود للأسقف',
         description: 'حلول سقفية خفيفة الوزن بتصاميم جذابة مع إمكانية إخفاء الإضاءة',
         icon: PanelTop,
       },
       {
-        title: 'ألواح مُلاي ثلاثية الأبعاد',
+        title: 'ألواح الشيبود ثلاثية الأبعاد',
         description: 'تصاميم 3D بارزة تضيف عمقاً وحيوية للجدران والأسقف',
         icon: Diamond,
       },
       {
-        title: 'ألواح مُلاي للحمامات',
+        title: 'ألواح الشيبود للحمامات',
         description: 'ألواح مقاومة للماء والرطوبة مثالية لأسقف وجدران الحمامات',
         icon: Bath,
       },
       {
         title: 'إضاءة LED مخفية',
-        description: 'تكامل مثالي مع ألواح مُلاي لإضاءة مخفية تخلق أجواءً ساحرة',
+        description: 'تكامل مثالي مع ألواح الشيبود لإضاءة مخفية تخلق أجواءً ساحرة',
         icon: Lightbulb,
       },
       {
@@ -252,35 +276,35 @@ const serviceContentMap: Record<string, ServiceContent> = {
       },
     ],
     advantages: [
-      { title: 'خبرة أكثر من 15 عاماً', description: 'سنوات طويلة من الخبرة في تركيب ألواح مُلاي بمختلف أنواعها', icon: Award },
-      { title: 'فريق فني متخصص', description: 'فنيون مدربون على أحدث تقنيات تركيب ألواح مُلاي', icon: Users },
+      { title: 'خبرة أكثر من 15 عاماً', description: 'سنوات طويلة من الخبرة في تركيب ألواح الشيبود بمختلف أنواعها', icon: Award },
+      { title: 'فريق فني متخصص', description: 'فنيون مدربون على أحدث تقنيات تركيب ألواح الشيبود', icon: Users },
       { title: 'ضمان شامل', description: 'ضمان شامل على الألواح والتركيب مع التزام بمعايير الجودة', icon: ShieldCheck },
       { title: 'أسعار تنافسية', description: 'أسعار تنافسية مع خيارات متعددة تناسب مختلف الميزانيات', icon: DollarSign },
       { title: 'معاينة مجانية', description: 'معاينة مجانية للموقع مع تقديم استشارة فنية شاملة', icon: Eye },
-      { title: 'مواد عالية الجودة', description: 'ألواح مُلاي من أفضل الشركات المصنعة بأوروبا وتركيا', icon: Star },
+      { title: 'مواد عالية الجودة', description: 'ألواح الشيبود من أفضل الشركات المصنعة بأوروبا وتركيا', icon: Star },
       { title: 'الالتزام بالمواعيد', description: 'تنفيذ المشاريع في الوقت المحدد مع الالتزام بالمواعيد', icon: Clock },
       { title: 'خدمة ما بعد البيع', description: 'متابعة مستمرة بعد التسليم وضمان جودة العمل على المدى الطويل', icon: HeadphonesIcon },
     ],
     faqs: [
       {
-        question: 'ما هو بديل الشيبود مُلاي؟',
-        answer: 'مُلاي هو بديل حديث للشيبود التقليدي مصنوع من مواد PVC عالية الجودة. يتميز بمقاومته للماء والرطوبة والحشرات، وسهولة تركيبه وتنظيفه، مع تصاميم عصرية متنوعة تتفوق على الشيبود التقليدي.',
+        question: 'ما هو بديل الشيبود؟',
+        answer: 'الشيبود هو بديل حديث للشيبود التقليدي مصنوع من مواد PVC عالية الجودة. يتميز بمقاومته للماء والرطوبة والحشرات، وسهولة تركيبه وتنظيفه، مع تصاميم عصرية متنوعة تتفوق على الشيبود التقليدي.',
       },
       {
-        question: 'ما الفرق بين مُلاي والشيبود العادي؟',
-        answer: 'ألواح مُلاي تتميز عن الشيبود التقليدي بعدة مميزات: مقاومة أعلى للماء والرطوبة، عمر افتراضي أطول (20+ سنة)، تصاميم عصرية متنوعة، سهولة التنظيف، عدم انتشار الحشرات، وإمكانية دمجها مع إضاءة LED مخفية.',
+        question: 'ما الفرق بين الشيبود والشيبود العادي؟',
+        answer: 'ألواح الشيبود تتميز عن الشيبود التقليدي بعدة مميزات: مقاومة أعلى للماء والرطوبة، عمر افتراضي أطول (20+ سنة)، تصاميم عصرية متنوعة، سهولة التنظيف، عدم انتشار الحشرات، وإمكانية دمجها مع إضاءة LED مخفية.',
       },
       {
         question: 'هل يمكن استخدامه في الحمامات؟',
-        answer: 'نعم، نوفر ألواح مُلاي خصيصاً للحمامات مصنوعة من مواد مقاومة للماء والرطوبة بنسبة 100%. مثالية لتغطية أسقف وجدران الحمامات وتحل محل السيراميك والبلاط بشكل عصري.',
+        answer: 'نعم، نوفر ألواح الشيبود خصيصاً للحمامات مصنوعة من مواد مقاومة للماء والرطوبة بنسبة 100%. مثالية لتغطية أسقف وجدران الحمامات وتحل محل السيراميك والبلاط بشكل عصري.',
       },
       {
-        question: 'ما مدة العمر الافتراضي لألواح مُلاي؟',
-        answer: 'ألواح مُلاي لها عمر افتراضي يتراوح بين 20 إلى 30 سنة عند التركيب الصحيح. هي لا تتأثر بالرطوبة أو الحشرات ولا تحتاج لصيانة دورية، مما يجعلها استثماراً طويل الأمد.',
+        question: 'ما مدة العمر الافتراضي لألواح الشيبود؟',
+        answer: 'ألواح الشيبود لها عمر افتراضي يتراوح بين 20 إلى 30 سنة عند التركيب الصحيح. هي لا تتأثر بالرطوبة أو الحشرات ولا تحتاج لصيانة دورية، مما يجعلها استثماراً طويل الأمد.',
       },
       {
-        question: 'هل يمكن تنظيف ألواح مُلاي بسهولة؟',
-        answer: 'بالتأكيد! من أهم مميزات ألواح مُلاي سهولة التنظيف. يكفي مسحها بقطعة قماش رطبة أو استخدام المكنسة الكهربائية. لا تحتاج لمنظفات خاصة أو مواد كيميائية قوية.',
+        question: 'هل يمكن تنظيف ألواح الشيبود بسهولة؟',
+        answer: 'بالتأكيد! من أهم مميزات ألواح الشيبود سهولة التنظيف. يكفي مسحها بقطعة قماش رطبة أو استخدام المكنسة الكهربائية. لا تحتاج لمنظفات خاصة أو مواد كيميائية قوية.',
       },
       {
         question: 'ما هي الألوان والتصاميم المتوفرة؟',
@@ -333,7 +357,7 @@ const serviceContentMap: Record<string, ServiceContent> = {
         icon: Sparkles,
       },
       {
-        title: 'بديل شيبود مُلاي',
+        title: 'بديل الشيبود',
         description: 'ألواح PVC عصرية بديلة للشيبود التقليدي بمقاومة عالية للماء',
         icon: Layers,
       },
@@ -366,7 +390,7 @@ const serviceContentMap: Record<string, ServiceContent> = {
     faqs: [
       {
         question: 'ما هي الخدمات التي تشملها الديكورات الداخلية؟',
-        answer: 'تشمل خدماتنا بديل الخشب والرخام، باركيه SPC، جبس بورد، ورق جدران 3D، ديكورات فوم، بديل شيبود مُلاي، مرايا جدارية، خلفيات تلفزيون، وهيدبورد غرف نوم. نقدم حلاً متكاملاً لجميع احتياجات الديكور الداخلي.',
+        answer: 'تشمل خدماتنا بديل الخشب والرخام، باركيه SPC، جبس بورد، ورق جدران 3D، ديكورات فوم، بديل الشيبود، مرايا جدارية، خلفيات تلفزيون، وهيدبورد غرف نوم. نقدم حلاً متكاملاً لجميع احتياجات الديكور الداخلي.',
       },
       {
         question: 'كم تستغرق مدة تنفيذ مشروع الديكورات؟',
@@ -426,13 +450,37 @@ const processSteps = [
 export default function ServiceLandingPage({
   service,
   settings,
+  content: propsContent,
   onBack,
   onOpenQuote,
 }: ServiceLandingPageProps) {
   const [scrolled, setScrolled] = useState(false);
 
-  // Get service-specific content or fallback
-  const content = serviceContentMap[service.slug] || serviceContentMap['electric-awnings'];
+  // Get service-specific content: from prop (DB) or fallback to hardcoded map
+  const dbContent = propsContent;
+  const fallbackContent = serviceContentMap[service.slug] || serviceContentMap['electric-awnings'];
+
+  // Helper: resolve icon name string to component
+  const resolveIcon = (iconName: string): React.ComponentType<{ className?: string }> => {
+    return iconMap[iconName] || Sun;
+  };
+
+  // Merge DB content with fallback, using DB values when available
+  const content = {
+    heroTagline: dbContent?.heroTagline || fallbackContent.heroTagline,
+    overview: dbContent?.overview?.length ? dbContent.overview : fallbackContent.overview,
+    stats: dbContent?.stats?.length
+      ? dbContent.stats.map((s) => ({ ...s, icon: resolveIcon(s.icon) }))
+      : fallbackContent.stats,
+    features: dbContent?.features?.length
+      ? dbContent.features.map((f) => ({ ...f, icon: resolveIcon(f.icon) }))
+      : fallbackContent.features,
+    advantages: dbContent?.advantages?.length
+      ? dbContent.advantages.map((a) => ({ ...a, icon: resolveIcon(a.icon) }))
+      : fallbackContent.advantages,
+    faqs: dbContent?.faqs?.length ? dbContent.faqs : fallbackContent.faqs,
+  };
+
   const ServiceIcon = iconMap[service.icon] || Sun;
 
   // Scroll to top on mount

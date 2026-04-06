@@ -482,3 +482,63 @@ Stage Summary:
 - Navigation back to homepage via logo click or "الرئيسية" button
 - All ساندوتش بانل references removed from codebase
 - Zero lint errors, homepage returns 200
+
+---
+## Task ID: 2-a
+### Work Task
+Move hardcoded service landing page content into the database so the admin can edit it from the dashboard.
+
+### Work Summary
+Completed all 9 steps successfully:
+
+1. **Prisma Schema** (`prisma/schema.prisma`) - Added `ServiceContent` model with fields: id, serviceId (unique, cascade), heroTagline, overview, stats, features, advantages, faqs (all JSON strings with defaults). Added `content` reverse relation on `Service` model.
+
+2. **Database Push** - `bun run db:push` synced schema to SQLite, regenerated Prisma Client.
+
+3. **Seed Data** (`prisma/seed.ts`) - Added ServiceContent seed data for all 3 services:
+   - electric-awnings (serviceId: '1'): 3 overview paragraphs, 4 stats, 6 features, 8 advantages, 6 FAQs
+   - mullay-sheboud (serviceId: '2'): 3 overview paragraphs, 4 stats, 6 features, 8 advantages, 6 FAQs
+   - interior-decoration (serviceId: '3'): 3 overview paragraphs, 4 stats, 10 features, 8 advantages, 6 FAQs
+   - All icon names stored as strings matching iconMap keys
+   - Used upsert for idempotent seeding
+
+4. **Public API** (`/api/services/[slug]/content/route.ts`) - GET endpoint that finds service by slug with `include: { content: true }`, returns `{ content }` or 404.
+
+5. **Service Landing Page** (`src/components/service-landing-page.tsx`) - Updated to:
+   - Export `ServiceContentData` interface (heroTagline, overview[], stats[], features[], advantages[], faqs[])
+   - Accept optional `content` prop on `ServiceLandingPageProps`
+   - Merge DB content with hardcoded `serviceContentMap` fallback using `resolveIcon()` helper
+   - Extended `iconMap` with all icons used in DB content (ArrowLeftRight, Home, Maximize, ShieldCheck, etc.)
+
+6. **Home Client** (`src/components/home-client.tsx`) - Updated to:
+   - Import `ServiceContentData` type from landing page
+   - Add `serviceContent` state
+   - Fetch content from `/api/services/[slug]/content` on service click
+   - Parse JSON strings and pass to `ServiceLandingPage` as `content` prop
+   - Clear content on back navigation
+
+7. **Admin Services API** - Updated both routes:
+   - `POST /api/admin/services` - Now creates nested `ServiceContent` when `content` field is provided, returns service with content included
+   - `PUT /api/admin/services/[id]` - Upserts `ServiceContent` when `content` field provided, handles both string and array formats for JSON fields
+
+8. **Admin Services Management** (`src/components/admin/services-management.tsx`) - Major enhancement:
+   - Added "محتوى" (Content) column to table showing existing/empty badge
+   - Added blue FileText "تعديل محتوى الصفحة" button per service row
+   - Created content edit dialog with ScrollArea containing 6 sections:
+     - Hero Tagline (textarea)
+     - Overview (textarea, one paragraph per line)
+     - Stats (dynamic list: value, label, icon dropdown with 34 Lucide icon options)
+     - Features (dynamic list: title, description, icon dropdown)
+     - Advantages (dynamic list: title, description, icon dropdown)
+     - FAQs (dynamic list: question, answer)
+   - Add/remove buttons for each dynamic list
+   - Saves content via PUT to admin API
+
+9. **Lint** - Zero errors, zero warnings. All endpoints verified (public content API 200, admin services API 200, homepage 200).
+
+Stage Summary:
+- Service landing page content now stored in database and editable from admin dashboard
+- Hardcoded `serviceContentMap` preserved as fallback when no DB content exists
+- Admin can edit hero tagline, overview, stats, features, advantages, and FAQs per service
+- 34 Lucide icon options available in admin content editor
+- All 3 services pre-populated with seed data matching original hardcoded values

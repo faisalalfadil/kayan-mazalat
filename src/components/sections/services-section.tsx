@@ -85,7 +85,7 @@ export default function ServicesSection({ services, onServiceClick }: ServicesSe
             خدمات <span className="text-primary">متكاملة</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            نقدم مجموعة شاملة من الخدمات المتخصصة في المظلات الكهربائية وبديل الشيبود مُلاي والديكورات الداخلية بأعلى معايير الجودة
+            نقدم مجموعة شاملة من الخدمات المتخصصة في المظلات الكهربائية وبديل الشيبود والديكورات الداخلية بأعلى معايير الجودة
           </p>
         </motion.div>
 

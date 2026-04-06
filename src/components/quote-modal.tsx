@@ -23,9 +23,9 @@ import { Calculator, Loader2, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const panelTypes = [
-  { value: 'mullay', label: 'بديل شيبود مُلاي', price: 65 },
-  { value: 'mullay-3d', label: 'بديل شيبود مُلاي ثلاثي الأبعاد', price: 85 },
-  { value: 'mullay-premium', label: 'بديل شيبود مُلاي بريميوم', price: 110 },
+  { value: 'mullay', label: 'بديل الشيبود', price: 65 },
+  { value: 'mullay-3d', label: 'بديل الشيبود ثلاثي الأبعاد', price: 85 },
+  { value: 'mullay-premium', label: 'بديل الشيبود بريميوم', price: 110 },
 ];
 
 const thicknesses = [40, 50, 60, 75, 80, 100, 120, 150, 200];

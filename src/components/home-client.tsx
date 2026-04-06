@@ -11,6 +11,7 @@ import ProjectDetailModal from '@/components/project-detail-modal';
 import BlogDetailModal from '@/components/blog-detail-modal';
 import PortfolioGallery from '@/components/portfolio-gallery';
 import ServiceLandingPage from '@/components/service-landing-page';
+import type { ServiceContentData } from '@/components/service-landing-page';
 import Hero from '@/components/sections/hero-section';
 import AboutSection from '@/components/sections/about-section';
 import ServicesSection from '@/components/sections/services-section';
@@ -100,6 +101,7 @@ export default function HomeClient({
   // Navigation state: 'home' shows homepage, 'service' shows landing page
   const [currentView, setCurrentView] = useState<'home' | 'service'>('home');
   const [landingService, setLandingService] = useState<Service | null>(null);
+  const [serviceContent, setServiceContent] = useState<ServiceContentData | undefined>(undefined);
 
   useEffect(() => {
     fetch('/api/settings')
@@ -115,16 +117,38 @@ export default function HomeClient({
   }, []);
 
   // Navigate to service landing page
-  const handleServiceClick = (service: Service) => {
+  const handleServiceClick = async (service: Service) => {
     setLandingService(service);
     setCurrentView('service');
+    setServiceContent(undefined);
     window.scrollTo(0, 0);
+
+    // Fetch service content from DB
+    try {
+      const res = await fetch(`/api/services/${service.slug}/content`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.content) {
+          setServiceContent({
+            heroTagline: data.content.heroTagline || '',
+            overview: JSON.parse(data.content.overview || '[]'),
+            stats: JSON.parse(data.content.stats || '[]'),
+            features: JSON.parse(data.content.features || '[]'),
+            advantages: JSON.parse(data.content.advantages || '[]'),
+            faqs: JSON.parse(data.content.faqs || '[]'),
+          });
+        }
+      }
+    } catch {
+      // Content will fall back to hardcoded values
+    }
   };
 
   // Navigate back to home from landing page
   const handleBackToHome = () => {
     setCurrentView('home');
     setLandingService(null);
+    setServiceContent(undefined);
     window.scrollTo(0, 0);
   };
 
@@ -146,6 +170,7 @@ export default function HomeClient({
       <>
         <ServiceLandingPage
           service={landingService}
+          content={serviceContent}
           settings={{
             phone: settings.phone || '0537639422',
             phone2: settings.phone2 || undefined,

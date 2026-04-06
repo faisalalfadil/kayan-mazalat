@@ -5,6 +5,7 @@ export async function GET() {
   try {
     const services = await db.service.findMany({
       orderBy: { order: 'asc' },
+      include: { content: true },
     })
     return NextResponse.json(services)
   } catch (error) {
@@ -19,7 +20,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { title, titleEn, slug, description, descriptionEn, icon, image, order, isActive } = body
+    const { title, titleEn, slug, description, descriptionEn, icon, image, order, isActive, content } = body
 
     if (!title || !description) {
       return NextResponse.json(
@@ -46,7 +47,20 @@ export async function POST(request: NextRequest) {
         image: image || null,
         order: order ?? 0,
         isActive: isActive ?? true,
+        ...(content ? {
+          content: {
+            create: {
+              heroTagline: content.heroTagline || '',
+              overview: typeof content.overview === 'string' ? content.overview : JSON.stringify(content.overview || []),
+              stats: typeof content.stats === 'string' ? content.stats : JSON.stringify(content.stats || []),
+              features: typeof content.features === 'string' ? content.features : JSON.stringify(content.features || []),
+              advantages: typeof content.advantages === 'string' ? content.advantages : JSON.stringify(content.advantages || []),
+              faqs: typeof content.faqs === 'string' ? content.faqs : JSON.stringify(content.faqs || []),
+            },
+          },
+        } : {}),
       },
+      include: { content: true },
     })
 
     return NextResponse.json(service, { status: 201 })

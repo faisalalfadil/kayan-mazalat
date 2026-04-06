@@ -16,7 +16,7 @@ const stats = [
 
 const servicePills = [
   'مظلات كهربائية',
-  'بديل شيبود مُلاي',
+  'بديل الشيبود',
   'بديل خشب',
   'بديل رخام',
   'باركيه SPC',
@@ -75,7 +75,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           {/* Subheading */}
           <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">
             شريكك لتصميم وتنفيذ أرقى المظلات والديكورات الداخلية في المملكة.
-            نقدم حلولاً متكاملة تشمل المظلات الكهربائية وبديل الشيبود مُلاي وجميع أعمال الديكورات.
+            نقدم حلولاً متكاملة تشمل المظلات الكهربائية وبديل الشيبود وجميع أعمال الديكورات.
           </p>
 
           {/* Service Pills */}
