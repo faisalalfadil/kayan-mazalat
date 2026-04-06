@@ -14,6 +14,15 @@ const stats = [
   { icon: HardHat, value: 50, suffix: '+', label: 'فريق عمل' },
 ];
 
+const servicePills = [
+  'مظلات كهربائية',
+  'ساندوتش بانل',
+  'بديل خشب',
+  'بديل رخام',
+  'باركيه SPC',
+  'جبس بورد',
+];
+
 export default function Hero({ onOpenQuote }: HeroProps) {
   const scrollToServices = () => {
     const el = document.getElementById('services');
@@ -47,7 +56,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             <span className="text-white/90 text-sm font-medium">
               أكثر من 15 عاماً من الخبرة
@@ -64,9 +73,22 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-            مرحباً بك في مؤسسة كيان القمة، شريكك لتصميم وتنفيذ أرقى المظلات والديكورات الداخلية في المملكة. نحن نجمع بين الابتكار التقني في المظلات الكهربائية والفن المعماري في الديكورات، لنوفر لك حلولاً متكاملة ترفع من قيمة وجمالية مساحتك.
+          <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">
+            شريكك لتصميم وتنفيذ أرقى المظلات والديكورات الداخلية في المملكة.
+            نقدم حلولاً متكاملة تشمل المظلات الكهربائية والساندوتش بانل وجميع أعمال الديكورات.
           </p>
+
+          {/* Service Pills */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-xl mx-auto">
+            {servicePills.map((pill) => (
+              <span
+                key={pill}
+                className="bg-white/10 backdrop-blur-sm border border-white/15 text-white/85 text-xs font-medium px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors cursor-default"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -91,7 +113,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
         </div>
 
         {/* Stats */}
-        <div className="mt-16 md:mt-24 max-w-3xl mx-auto">
+        <div className="mt-16 md:mt-20 max-w-3xl mx-auto">
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {stats.map((stat) => (

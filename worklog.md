@@ -332,3 +332,64 @@ Stage Summary:
 - Projects: ديكور فيلا (حي النرجس), مظلة سيارة (طريق الملك فهد), ساندوتش بانل (حي الخليج)
 - Blog: 3 real articles about awnings, cladding, and exterior decoration
 - All content in Arabic RTL, lint passes with zero errors
+
+---
+## Task ID: 10
+### Work Task
+Create a new "Decoration Features" section showcasing 10 interior decoration sub-services and integrate it into the homepage after the Services section.
+
+### Work Summary
+1. **Created `/src/components/sections/decoration-features.tsx`** - New section component with:
+   - `'use client'` directive, framer-motion scroll animations (fade-in on view with stagger)
+   - Section header with orange badge "تشكيلة متكاملة", heading "أعمال الديكورات الداخلية", and subtitle
+   - 10 sub-service icon cards in a responsive grid (2 cols mobile, 3 tablet, 5 desktop)
+   - Each card: rounded-xl, border, p-5, hover shadow + elevation effect, orange icon container with hover fill animation
+   - Centered text alignment for compact card layout
+   - Cards: بديل خشب (TreePine), بديل رخام (Diamond), بارتشن وقواطع (Columns3), ديكورات فوم (Sparkles), جبس بورد (LayoutGrid), ورق جدران 3D (Wallpaper), مرايا جدارية (Square), باركيه SPC (SquareStack), خلفيات تلفزيون (Monitor), هيدبورد غرف نوم (BedDouble)
+   - All descriptions in Arabic, proper RTL layout
+   - Uses existing project color scheme (orange primary via `text-primary`, `bg-primary/10`, `bg-primary`)
+
+2. **Updated `/src/components/home-client.tsx`** - Integrated the new section:
+   - Added import for `DecorationFeatures` component
+   - Rendered `<DecorationFeatures />` immediately after `<ServicesSection />` and before `<ProjectsSection />`
+
+3. **Lint**: Zero errors, zero warnings. Dev server compiled successfully (799ms, 288ms).
+
+---
+Task ID: 9
+Agent: main
+Task: Change color theme from blue to orange and light blue
+
+Work Log:
+- Updated globals.css: changed all oklch hue values from 250 (blue) to 45 (orange) for primary, 210 (sky) for accent
+- Updated hero-section.tsx: gradient text from blue to orange-300/orange-400/sky-300
+- Updated admin/page.tsx: all blue references to orange
+- Batch updated all admin components (6 files) and public sections
+- Updated scrollbar, gradient-text CSS utilities
+- Verified zero blue references remain in codebase
+
+Stage Summary:
+- Primary color: Orange (oklch hue 45)
+- Secondary/Accent: Light blue/sky (oklch hue 210)
+- Zero lint errors, all pages return 200
+
+---
+Task ID: 10
+Agent: main
+Task: Add design ideas from reference decoration website
+
+Work Log:
+- Fetched and analyzed content from reference decoration website
+- Created new DecorationFeatures section (src/components/sections/decoration-features.tsx) with 10 sub-service cards:
+  بديل خشب, بديل رخام, بارتشن وقواطع, ديكورات فوم, جبس بورد, ورق جدران 3D, مرايا جدارية, باركيه SPC, خلفيات تلفزيون, هيدبورد غرف نوم
+- Enhanced About section: added second floating card (+500 projects), service area pills (مجالس/صالات/مطابخ/فلل), improved descriptions, better animations
+- Enhanced Services section: gradient top bars on cards (amber/orange, orange/rose, sky/cyan), trust indicators row
+- Enhanced Hero section: added 6 service pills (مظلات كهربائية, ساندوتش بانل, بديل خشب, بديل رخام, باركيه SPC, جبس بورد), refined description text
+- Integrated DecorationFeatures section in home-client.tsx after ServicesSection
+
+Stage Summary:
+- 10 new sub-service cards in responsive grid (2/3/5 columns)
+- About section with service area pills and second stats badge
+- Services section with gradient overlay cards
+- Hero with service pill badges
+- Zero lint errors, all pages return 200

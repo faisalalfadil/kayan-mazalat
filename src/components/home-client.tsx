@@ -13,6 +13,7 @@ import PortfolioGallery from '@/components/portfolio-gallery';
 import Hero from '@/components/sections/hero-section';
 import AboutSection from '@/components/sections/about-section';
 import ServicesSection from '@/components/sections/services-section';
+import DecorationFeatures from '@/components/sections/decoration-features';
 import ProjectsSection from '@/components/sections/projects-section';
 import StatsSection from '@/components/sections/stats-section';
 import BlogSection from '@/components/sections/blog-section';
@@ -135,6 +136,8 @@ export default function HomeClient({
           services={services}
           onServiceClick={handleServiceClick}
         />
+
+        <DecorationFeatures />
 
         <ProjectsSection
           projects={projects}

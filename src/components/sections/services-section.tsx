@@ -11,6 +11,8 @@ import {
   ArrowLeft,
   Sun,
   Paintbrush,
+  Tv,
+  Droplets,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -45,16 +47,23 @@ interface ServicesSectionProps {
 }
 
 const containerVariants = {
-  hidden: { opacity: 1 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 25 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+// Map service titles to gradient colors
+const gradients: Record<string, string> = {
+  '1': 'from-amber-500 to-orange-600',
+  '2': 'from-orange-500 to-rose-500',
+  '3': 'from-sky-500 to-cyan-500',
 };
 
 export default function ServicesSection({ services, onServiceClick }: ServicesSectionProps) {
@@ -63,7 +72,7 @@ export default function ServicesSection({ services, onServiceClick }: ServicesSe
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
@@ -80,41 +89,48 @@ export default function ServicesSection({ services, onServiceClick }: ServicesSe
           </p>
         </motion.div>
 
-        {/* Services Grid */}
+        {/* Services Grid - Featured cards with gradient icons */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {services.map((service) => {
             const IconComponent = iconMap[service.icon] || Layers;
+            const gradient = gradients[service.order.toString()] || 'from-primary to-primary/80';
             return (
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="group bg-card border rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary/20"
+                whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                className="group bg-card border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:border-primary/20"
               >
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  <IconComponent className="w-7 h-7" />
+                {/* Top gradient bar with icon */}
+                <div className={`relative bg-gradient-to-l ${gradient} p-6`}>
+                  <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3" />
+                  <div className="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="w-8 h-8" />
+                  </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
+                {/* Content */}
+                <div className="p-6 pt-5">
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
 
-                {/* Description */}
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {service.description}
-                </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {service.description}
+                  </p>
 
-                {/* Arrow */}
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <button onClick={() => onServiceClick(service)} className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                  {/* CTA */}
+                  <button
+                    onClick={() => onServiceClick(service)}
+                    className="text-primary text-sm font-medium flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
+                  >
                     اعرف المزيد
                     <ArrowLeft className="w-4 h-4" />
                   </button>
@@ -122,6 +138,28 @@ export default function ServicesSection({ services, onServiceClick }: ServicesSe
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* Quick trust indicators */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-6 md:gap-10"
+        >
+          {[
+            { icon: Sun, text: 'تصاميم عصرية' },
+            { icon: Droplets, text: 'مواد مقاومة للماء' },
+            { icon: Tv, text: 'تنفيذ احترافي' },
+          ].map((item) => (
+            <div key={item.text} className="flex items-center gap-2 text-muted-foreground">
+              <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                <item.icon className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium">{item.text}</span>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
