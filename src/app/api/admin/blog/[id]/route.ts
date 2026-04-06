@@ -8,7 +8,24 @@ export async function PUT(
   try {
     const { id } = await params
     const body = await request.json()
-    const { title, excerpt, content, image, images, author, published } = body
+    const {
+      title,
+      excerpt,
+      content,
+      image,
+      author,
+      published,
+      metaTitle,
+      metaDescription,
+      focusKeyword,
+      keywords,
+      readingTime,
+      wordCount,
+      seoScore,
+      featuredImageAlt,
+      categoryId,
+      tagIds,
+    } = body
 
     const post = await db.blogPost.update({
       where: { id },
@@ -17,9 +34,30 @@ export async function PUT(
         ...(excerpt !== undefined && { excerpt: excerpt || null }),
         ...(content !== undefined && { content }),
         ...(image !== undefined && { image: image || null }),
-        ...(images !== undefined && { images: images || null }),
         ...(author !== undefined && { author }),
-        ...(published !== undefined && { published }),
+        ...(published !== undefined && {
+          published,
+          publishedAt: published ? new Date() : null,
+        }),
+        ...(metaTitle !== undefined && { metaTitle: metaTitle || null }),
+        ...(metaDescription !== undefined && { metaDescription: metaDescription || null }),
+        ...(focusKeyword !== undefined && { focusKeyword: focusKeyword || null }),
+        ...(keywords !== undefined && { keywords: keywords || null }),
+        ...(readingTime !== undefined && { readingTime }),
+        ...(wordCount !== undefined && { wordCount }),
+        ...(seoScore !== undefined && { seoScore }),
+        ...(featuredImageAlt !== undefined && { featuredImageAlt: featuredImageAlt || null }),
+        ...(categoryId !== undefined && { categoryId: categoryId || null }),
+        ...(tagIds !== undefined && {
+          tags: {
+            set: [],
+            connect: tagIds.map((tagId: string) => ({ id: tagId })),
+          },
+        }),
+      },
+      include: {
+        category: true,
+        tags: true,
       },
     })
 

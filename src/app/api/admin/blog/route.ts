@@ -12,6 +12,10 @@ function generateSlug(title: string): string {
 export async function GET() {
   try {
     const posts = await db.blogPost.findMany({
+      include: {
+        category: true,
+        tags: true,
+      },
       orderBy: { createdAt: 'desc' },
     })
     return NextResponse.json(posts)
@@ -27,7 +31,24 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { title, excerpt, content, image, images, author, published } = body
+    const {
+      title,
+      excerpt,
+      content,
+      image,
+      author,
+      published,
+      metaTitle,
+      metaDescription,
+      focusKeyword,
+      keywords,
+      readingTime,
+      wordCount,
+      seoScore,
+      featuredImageAlt,
+      categoryId,
+      tagIds,
+    } = body
 
     if (!title || !content) {
       return NextResponse.json(
@@ -45,9 +66,25 @@ export async function POST(request: NextRequest) {
         excerpt: excerpt || null,
         content,
         image: image || null,
-        images: images || null,
         author: author || 'كيان القمة',
         published: published ?? false,
+        metaTitle: metaTitle || null,
+        metaDescription: metaDescription || null,
+        focusKeyword: focusKeyword || null,
+        keywords: keywords || null,
+        readingTime: readingTime || null,
+        wordCount: wordCount || null,
+        seoScore: seoScore || null,
+        featuredImageAlt: featuredImageAlt || null,
+        categoryId: categoryId || null,
+        publishedAt: published ? new Date() : null,
+        tags: tagIds && tagIds.length > 0 ? {
+          connect: tagIds.map((id: string) => ({ id })),
+        } : undefined,
+      },
+      include: {
+        category: true,
+        tags: true,
       },
     })
 

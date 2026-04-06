@@ -8,11 +8,11 @@ export async function GET() {
       orderBy: { order: 'asc' },
     });
 
-    return NextResponse.json(services);
+    return NextResponse.json({ success: true, services });
   } catch (error) {
     console.error('Services API error:', error);
     return NextResponse.json(
-      { error: 'حدث خطأ في جلب الخدمات' },
+      { success: false, error: 'حدث خطأ في جلب الخدمات', services: [] },
       { status: 500 }
     );
   }

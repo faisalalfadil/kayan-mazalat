@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { verifyPassword, generateToken } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,14 +24,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (admin.password !== password) {
+    const isValidPassword = await verifyPassword(password, admin.password)
+
+    if (!isValidPassword) {
       return NextResponse.json(
         { success: false, error: 'بيانات الدخول غير صحيحة' },
         { status: 401 }
       )
     }
 
-    return NextResponse.json({
+    const token = generateToken()
+
+    const response = NextResponse.json({
       success: true,
       admin: {
         id: admin.id,
@@ -38,7 +43,19 @@ export async function POST(request: NextRequest) {
         email: admin.email,
         role: admin.role,
       },
+      token,
     })
+
+    // Set secure httpOnly cookie
+    response.cookies.set('admin_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: '/',
+    })
+
+    return response
   } catch (error) {
     console.error('Auth error:', error)
     return NextResponse.json(

@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -65,17 +65,57 @@ model Project {
 }
 
 model BlogPost {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  excerpt     String?
-  content     String
+  id                String    @id @default(cuid())
+  title             String
+  slug              String    @unique
+  excerpt           String?
+  content           String
+  image             String?
+  images            String?
+  author            String    @default("كيان القمة")
+  published         Boolean   @default(false)
+
+  // SEO Fields
+  metaTitle         String?
+  metaDescription   String?
+  focusKeyword      String?
+  keywords          String?
+  readingTime       Int?
+  wordCount         Int?
+  viewCount         Int       @default(0)
+  seoScore          Int?
+  featuredImageAlt  String?
+
+  // Publishing
+  publishedAt       DateTime?
+  scheduledAt       DateTime?
+
+  // Relations
+  categoryId        String?
+  category          Category? @relation(fields: [categoryId], references: [id])
+  tags              Tag[]
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?
   image       String?
-  images      String?
-  author      String   @default("كيان القمة")
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  posts       BlogPost[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Tag {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  posts     BlogPost[]
+  createdAt DateTime   @default(now())
 }
 
 model Lead {

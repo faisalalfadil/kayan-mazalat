@@ -16,11 +16,11 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    return NextResponse.json(projects);
+    return NextResponse.json({ success: true, projects });
   } catch (error) {
     console.error('Projects API error:', error);
     return NextResponse.json(
-      { error: 'حدث خطأ في جلب المشاريع' },
+      { success: false, error: 'حدث خطأ في جلب المشاريع', projects: [] },
       { status: 500 }
     );
   }
